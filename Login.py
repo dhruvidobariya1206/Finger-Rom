@@ -59,7 +59,7 @@ class LoginPage(tk.Tk):
             if validation:
                 tk.messagebox.showinfo("Login Successful",
                                        "Welcome {}".format(username))
-                Dashboard.Dashboard()
+                Dashboard.Dashboard(username)
                 Signup.top.deiconify()
                 LoginPage.top.destroy()
                 # LoginPage.top.deiconify()
@@ -91,3 +91,5 @@ class LoginPage(tk.Tk):
 top = LoginPage()
 top.title("Login Page")
 top.mainloop()
+
+# top.destroy()

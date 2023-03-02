@@ -6,6 +6,7 @@ from tkinter import *
 import db_conn
 import tkinter_demo as tkdemo
 import Signup
+import Login
 
 class Dashboard(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -24,11 +25,20 @@ class Dashboard(tk.Tk):
                        "background": "dark blue",
                        "foreground": "#EEFFFF"}
         
-        lb1= Label(main_frame, text="Enter Name", width=800, font=("arial",20), background="dark blue")  
+        lb1= Label(main_frame, text="Enter Name", width=800, font=("Verdana",20), background="dark blue")  
         lb1.place(x=0, y=0)
         
+        lb2 = Label(main_frame, text="username", width=15, font=("Verdana",12), background="blue")
+        lb2.place(x=30, y=60)
+        
+        lb3 = Label(main_frame, text="Left Hand", width=10, font=("Verdana",10))
+        lb3.place(x=30,y=140)
+        
+        Button(main_frame, text="index", width=15, command=lambda: getlogin()).place(x=150,y=200) 
         
         
-top = Dashboard()
-top.title("Dashboard")
-top.mainloop()
+# top = Dashboard()
+# top.title("Dashboard")
+# top.mainloop()
+
+# top.destroy()

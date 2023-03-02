@@ -44,15 +44,16 @@ class SignupPage(tk.Tk):
         lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12))  
         lb5.place(x=20, y=200)  
         gen = StringVar()  
-        Radiobutton(main_frame, text="Male", padx=5,variable=vars, value='M').place(x=200, y=200)  
-        Radiobutton(main_frame, text="Female", padx =10,variable=vars, value='F').place(x=280,y=200)  
+        Radiobutton(main_frame, text="Male", padx=5,variable=gen, value='M').place(x=200, y=200)  
+        Radiobutton(main_frame, text="Female", padx =10,variable=gen, value='F').place(x=280,y=200)  
         # Radiobutton(main_frame, text="others", padx=15, variable=vars, value=3).place(x=310,y=240)  
         
         list_of_grp = ("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")  
         cv = StringVar()  
+        cv.set("A+") 
         drplist= OptionMenu(main_frame, cv, *list_of_grp)  
         drplist.config(width=15)  
-        cv.set("A+")  
+         
         lb2= Label(main_frame, text="Select Blood Group", width=15,font=("arial",12))  
         lb2.place(x=20,y=240)  
         drplist.place(x=200, y=240)  
@@ -73,37 +74,6 @@ class SignupPage(tk.Tk):
 
 
 
-        # label_user = tk.Label(main_frame, text_styles, text="Username:")
-        # label_user.grid(row=1, column=0)
-
-        # label_number = tk.Label(main_frame, text_styles, text="Phone Number:")
-        # label_number.grid(row=2, column=0)
-        
-        # label_grp = tk.Label(main_frame, text_styles, text="Blood Group:")
-        # label_grp.grid(row=3, column=0)
-
-        # label_pw = tk.Label(main_frame, text_styles, text="Password:")
-        # label_pw.grid(row=4, column=0)
-        
-        # entry_user = ttk.Entry(main_frame, width=20, cursor="xterm")
-        # entry_user.grid(row=1, column=1)
-        
-        # entry_number = ttk.Entry(main_frame, width=20, cursor="xterm")
-        # entry_number.grid(row=2, column=1)
-        
-        # # entry_grp = ttk.Combobox(state="select",
-        # #                         values=["Python", "C", "C++", "Java"])(main_frame, width=20, cursor="xterm")
-        # # entry_grp.grid(row=3,column=1)
-        
-        # entry_grp = ttk.Combobox(main_frame, values=["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"], width=20, cursor="xterm")
-        # entry_grp.grid(row=3,column=1)
-
-        # entry_pw = ttk.Entry(main_frame, width=20, cursor="xterm", show="*")
-        # entry_pw.grid(row=4, column=1)
-        
-        # button = ttk.Button(main_frame, text="Create Account", command=lambda: signup())
-        # button.grid(row=5, column=1)
-
         def signup():
             # Creates a text file with the Username and password
             user = en1.get()
@@ -111,6 +81,15 @@ class SignupPage(tk.Tk):
             rpw = en7.get()
             phone = en4.get()
             bloodGrp = cv.get()
+            print()
+            print()
+            print()
+            
+            print(bloodGrp)
+            print()
+            print()
+            print()
+            
             gender = gen.get()
             validation = validate_user(phone)
             print(user+" "+pw+" "+phone+" "+bloodGrp)
@@ -149,6 +128,6 @@ class SignupPage(tk.Tk):
 
 
 
-# root = SignupPage()
-# root.title("Sign Up Page")
-# root.mainloop()
+root = SignupPage()
+root.title("Sign Up Page")
+root.mainloop()
