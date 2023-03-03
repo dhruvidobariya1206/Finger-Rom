@@ -92,4 +92,4 @@ top = LoginPage()
 top.title("Login Page")
 top.mainloop()
 
-# top.destroy()
+top.destroy()

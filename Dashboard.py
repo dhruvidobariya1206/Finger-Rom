@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import *
+from prettytable import PrettyTable
+import subprocess
 
 import db_conn
 import tkinter_demo as tkdemo
@@ -28,17 +30,25 @@ class Dashboard(tk.Tk):
         lb1= Label(main_frame, text="Enter Name", width=800, font=("Verdana",20), background="dark blue")  
         lb1.place(x=0, y=0)
         
-        lb2 = Label(main_frame, text="username", width=15, font=("Verdana",12), background="blue")
-        lb2.place(x=30, y=60)
+        lb2 = Label(main_frame, text="username", width=15, height=2, font=("Verdana",12), background="blue")
+        lb2.place(x=600, y=60)
         
-        lb3 = Label(main_frame, text="Left Hand", width=10, font=("Verdana",10))
-        lb3.place(x=30,y=140)
+        # lb3 = Label(main_frame, text="Record", width=10, font=("Verdana",10))
+        # lb3.place(x=30,y=140)
         
-        Button(main_frame, text="index", width=15, command=lambda: getlogin()).place(x=150,y=200) 
+        Button(main_frame, text="Record", width=18, command=lambda: run_script()).place(x=600,y=150) 
+        
+        # table = PrettyTable(['Subject Code', 'Subject', 'Marks'])
+        # print(table)
         
         
-# top = Dashboard()
-# top.title("Dashboard")
-# top.mainloop()
+    
+        def run_script():
+            subprocess.call(['python', 'fing_rom_live.py'])
+        
+        
+top = Dashboard()
+top.title("Dashboard")
+top.mainloop()
 
-# top.destroy()
+top.destroy()
