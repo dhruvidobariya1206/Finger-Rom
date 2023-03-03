@@ -128,6 +128,6 @@ class SignupPage(tk.Tk):
 
 
 
-# root = SignupPage()
-# root.title("Sign Up Page")
-# root.mainloop()
+root = SignupPage()
+root.title("Sign Up Page")
+root.mainloop()

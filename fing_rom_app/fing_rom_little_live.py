@@ -69,7 +69,7 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
                 mp_drawing.draw_landmarks(image, hand, mp_hands.HAND_CONNECTIONS, 
                                         mp_drawing.DrawingSpec(color=(121, 22, 76), thickness=2, circle_radius=4),
                                         mp_drawing.DrawingSpec(color=(250, 44, 250), thickness=2, circle_radius=2),
-                                         )
+                                        )
                 
             draw_finger_angles(image, results, joint_list)
            

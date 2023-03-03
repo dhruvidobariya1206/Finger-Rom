@@ -41,14 +41,26 @@ class Dashboard(tk.Tk):
         # table = PrettyTable(['Subject Code', 'Subject', 'Marks'])
         # print(table)
         
+        Button(main_frame, text="List Angles", width=18, command=lambda: list_angles()).place(x=20,y=50) 
         
     
         def run_script():
             subprocess.call(['python', 'fing_rom_live.py'])
         
+        def list_angles():
+            print("Angles")
+            query = "Select * from patients"
+            print(query)
+            db_conn.mycursor.execute(query)
+            row = db_conn.mycursor.fetchall()
+            for ang in row:
+                print(ang)
+                ang = Label(main_frame,text=ang)
+                ang.pack()
         
-top = Dashboard()
-top.title("Dashboard")
-top.mainloop()
+        
+# top = Dashboard()
+# top.title("Dashboard")
+# top.mainloop()
 
-top.destroy()
+# top.destroy()
