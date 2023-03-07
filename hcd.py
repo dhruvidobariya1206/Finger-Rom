@@ -165,7 +165,7 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
             ring_angles["RING_FINGER_PIP"]=round(ring_angles["RING_FINGER_PIP"],1)
             pinky_angles["PINKY_PIP"]=round(pinky_angles["PINKY_PIP"],1)
             thumb_angles["THUMB_IP"]=round(thumb_angles["THUMB_IP"],1)
-            query_pip = f"insert into angle_pip(P_id,ind,mid,ring,little,thumb) values('{user}','{str(index_angles['INDEX_FINGER_PIP'])}','{str(middle_angles['MIDDLE_FINGER_PIP'])}','{str(ring_angles['RING_FINGER_PIP'])}','{str(pinky_angles['PINKY_PIP'])}','{str(thumb_angles['THUMB_IP'])}'"
+            query_pip = f"insert into angle_pip(P_id,ind,mid,ring,little,thumb) values('{user}','{str(index_angles['INDEX_FINGER_PIP'])}','{str(middle_angles['MIDDLE_FINGER_PIP'])}','{str(ring_angles['RING_FINGER_PIP'])}','{str(pinky_angles['PINKY_PIP'])}','{str(thumb_angles['THUMB_IP'])}')"
             # print(query_pip)
             db_conn.mycursor.execute(query_pip) 
 

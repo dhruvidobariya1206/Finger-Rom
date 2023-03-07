@@ -5,7 +5,7 @@ from tkinter import *
 
 import db_conn
 import tkinter_demo as tkdemo
-import Signup
+from Signup import *
 import Dashboard
 
 
@@ -55,7 +55,7 @@ class LoginPage(tk.Tk):
         Button(main_frame, text="Register", width=15, command=lambda: get_signup()).place(x=300,y=200) 
         
         def get_signup():
-            Signup.SignupPage()
+            SignupPage()
             # SignupPage()
 
         def getlogin():
@@ -76,12 +76,14 @@ class LoginPage(tk.Tk):
                 # print()
                 # print()
                 # print()
+                
                 Dashboard.Dashboard(username, number)
-                Signup.top.deiconify()
+                SignupPage.top.deiconify()
                 LoginPage.top.deiconify()
+                LoginPage.destroy(self)
                 # LoginPage.top.deiconify()
                 # root.deiconify()          #commented
-                tkdemo.top.destroy()
+                # tkdemo.top.destroy()
                 # top.destroy()
             else:
                 tk.messagebox.showerror("Information", "The Username or Password you have entered are incorrect ")

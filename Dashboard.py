@@ -4,6 +4,11 @@ from tkinter import ttk
 from tkinter import *
 from prettytable import PrettyTable
 import subprocess
+from matplotlib.figure import *
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+import matplotlib.pyplot as plt
+import numpy as np
+# from matplotlib import *
 # import os
 
 import db_conn
@@ -55,6 +60,8 @@ class Dashboard(tk.Tk):
         lb1= Label(main_frame, text="", width=800, font=("Verdana",20), background="dark blue")  
         lb1.place(x=0, y=0)
         
+        Button(main_frame, text="List Angles", width=18, command=lambda: list_angles()).place(x=20,y=50) 
+        
         lb2 = Label(main_frame, text=uname, width=15, height=2, font=("Verdana",12), background="blue")
         lb2.place(x=600, y=60)
         
@@ -63,33 +70,37 @@ class Dashboard(tk.Tk):
         
         Button(main_frame, text="Record", width=18, command=lambda: run_script()).place(x=600,y=150) 
         
-        # table = PrettyTable(['Subject Code', 'Subject', 'Marks'])
-        # print(table)
-        
-        Button(main_frame, text="List Angles", width=18, command=lambda: list_angles()).place(x=20,y=50) 
+        Button(main_frame, text="Veiw Progress", width=18, command=lambda: view_progress()).place(x=600,y=240) 
         
     
         def run_script():
             # subprocess.call(['python', f'hcd.py',f'{user_id}'])
             subprocess.call(["python",'hcd.py',f"{user_id}"])
             
-            # os.system(f"hcd.py {user_id}")
+            
             
         
         def list_angles():
-            ang_label = Label(main_frame,text='L PIP', width=5)
-            ang_label.place(x=20, y=100)
-            ang_label = Label(main_frame,text='L DIP', width=5)
-            ang_label.place(x=80, y=100)
-            ang_label = Label(main_frame,text='L MCP', width=5)
-            ang_label.place(x=140, y=100)
-            ang_label = Label(main_frame,text='R PIP', width=5)
-            ang_label.place(x=200, y=100)
-            ang_label = Label(main_frame,text='R DIP', width=5)
-            ang_label.place(x=260, y=100)
-            ang_label = Label(main_frame,text='R MCP', width=5)
-            ang_label.place(x=320, y=100)
-            print("Angles")
+            ang_label1 = Label(main_frame,text='Finger', width=10)
+            ang_label1.place(x=20, y=100)
+            ang_label2 = Label(main_frame,text='PIP', width=10)
+            ang_label2.place(x=120, y=100)
+            ang_label3 = Label(main_frame,text='DIP', width=10)
+            ang_label3.place(x=220, y=100)
+            ang_label4 = Label(main_frame,text='MCP', width=10)
+            ang_label4.place(x=320, y=100)
+            
+            fin_label1 = Label(main_frame,text='Index', width=10)
+            fin_label1.place(x=20, y=140)
+            fin_label2 = Label(main_frame,text='Middle', width=10)
+            fin_label2.place(x=20, y=180)
+            fin_label3 = Label(main_frame,text='Ring', width=10)
+            fin_label3.place(x=20, y=220)
+            fin_label4 = Label(main_frame,text='Little', width=10)
+            fin_label4.place(x=20, y=260)
+            fin_label5 = Label(main_frame,text='Thumb', width=10)
+            fin_label5.place(x=20, y=300)
+            # print("Angles")
             query1 = f"Select * from angle_pip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 1;"
             print(query1)
             db_conn.mycursor.execute(query1)
@@ -104,26 +115,77 @@ class Dashboard(tk.Tk):
             print(query3)
             db_conn.mycursor.execute(query3)
             row3 = db_conn.mycursor.fetchone()
-            # cnt=1
-            # for ang in row:
-            #     # print(ang)
-            #     for y in range(len(ang)):
-            #         ang_label = Label(main_frame,text=ang[y], width=5)
-            #         ang_label.place(x=20+(60*y), y=100+(40*cnt))
+            
+            for ang in range(5):
+                value1 = Label(main_frame,text=row1[2+ang], width=10)
+                value1.place(x=120, y=140+(40*ang))
+                
+                value2 = Label(main_frame,text=row2[2+ang], width=10)
+                value2.place(x=220, y=140+(40*ang))
+                
+                value3 = Label(main_frame,text=row3[2+ang], width=10)
+                value3.place(x=320, y=140+(40*ang))
                     
-                
-                
-                
-                # ang_label = Label(main_frame,text=ang[1], width=5)
-                # ang_label.place(x=20+(25*r), y=100+(40*cnt))
-                # r=r+1
-                # ang_label = Label(main_frame,text=ang[2], width=5)
-                # ang_label.place(x=20+(25*r), y=100+(40*cnt))
-                # ang_label.pack()
-                # cnt=cnt+1
-        
-        
-# top = Dashboard()
+        def view_progress():
+            print("View Progress")
+            fig = Figure(figsize = (5,5), dpi = 100)
+            
+            plot1 = fig.add_subplot(111)
+            
+            query1 = f"Select ind, mid, ring, little, thumb from angle_pip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
+            # print(query1)
+            db_conn.mycursor.execute(query1)
+            row1 = db_conn.mycursor.fetchall()
+
+            query2 = f"Select ind, mid, ring, little, thumb from angle_tip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
+            # print(query1)
+            db_conn.mycursor.execute(query2)
+            row2 = db_conn.mycursor.fetchall()
+
+            query2 = f"Select ind, mid, ring, little, thumb from angle_mcp where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
+            # print(query1)
+            db_conn.mycursor.execute(query2)
+            row3 = db_conn.mycursor.fetchall()
+            
+            # if(row1.ro)
+            
+            prev_pip=np.array(row1[1])
+            curr_pip=np.array(row1[0])
+            prev_tip=np.array(row2[1])
+            curr_tip=np.array(row2[0])
+            prev_mcp=np.array(row3[1])
+            curr_mcp=np.array(row3[0])
+            
+            x=['index','middle','ring','little','thumb']
+            plt.plot(x,prev_pip,label="Prev PIP", marker="o", linestyle = 'dashed',c = '#4CAF50')
+            plt.plot(x,curr_pip, label="curr PIP", marker="o",c = '#4CAF50')
+            plt.plot(x,prev_tip,label="Prev TIP", marker="o", linestyle = 'dashed',c = '#AAAF50')
+            plt.plot(x,curr_tip, label="curr TIP", marker="o",c = '#AAAF50')
+            plt.plot(x,prev_mcp,label="Prev MCP", marker="o", linestyle = 'dashed',c = '#4CAFAA')
+            plt.plot(x,curr_mcp, label="curr MCP", marker="o",c = '#4CAFAA')
+            plt.xlabel("Finger")
+            plt.ylabel("Angle Measure")
+            plt.title('Progress')
+            plt.legend(loc='upper right')
+            plt.show()
+            
+            # creating the Tkinter canvas
+            # containing the Matplotlib figure
+            canvas = FigureCanvasTkAgg(fig,master = top)  
+            canvas.draw()
+  
+            # placing the canvas on the Tkinter window
+            canvas.get_tk_widget().pack()
+  
+            # creating the Matplotlib toolbar
+            toolbar = NavigationToolbar2Tk(canvas,top)
+            toolbar.update()
+  
+            # placing the toolbar on the Tkinter window
+            canvas.get_tk_widget().pack()
+
+            
+# top = Dashboard("dhruvi","9876543210")
 # top.title("Dashboard")
 # top.mainloop()
 

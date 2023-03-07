@@ -93,30 +93,45 @@ class SignupPage(tk.Tk):
             gender = gen.get()
             validation = validate_user(phone)
             print(user+" "+pw+" "+phone+" "+bloodGrp)
-            if validation and pw==rpw and len(phone)==10:
+            if pw!=rpw:
+                tk.messagebox.showerror("Information", "Please enter same password.")
+            elif(len(phone)!=10):
+                tk.messagebox.showerror("Information", "Your phone number needs to be 10 digits long.")
+            elif(len(pw)<3):
+                tk.messagebox.showerror("Information", "Your password needs to be longer than 3 values.")
+            elif validation:
                 tk.messagebox.showerror("Information", "That Username already exists")
-            elif(len(phone)>0 and len(phone)<=10 and pw==rpw):
-                if len(pw) > 3:
+            else:
+                # if len(pw) > 3:
                     # credentials = open("credentials.txt", "a")
                     # credentials.write(f"Username,{user},Password,{pw},\n")
                     # credentials.close()
                     
-                    query = "insert into patients(PName, PPhone, Gender, PBlood, Password) values('"+user+"','"+phone+"','"+gender+"','"+bloodGrp+"','"+pw+"')"
-                    print(query)
-                    db_conn.mycursor.execute(query)
-                    tk.messagebox.showinfo("Information", "Your account details have been stored.")
-                    SignupPage.destroy(self)
+                query = "insert into patients(PName, PPhone, Gender, PBlood, Password) values('"+user+"','"+phone+"','"+gender+"','"+bloodGrp+"','"+pw+"')"
+                print(query)
+                db_conn.mycursor.execute(query)
+                
+                q1=f"SELECT PId from patients WHERE PPhone='{phone}';"
+                db_conn.mycursor.execute(q1)
+                row1 = db_conn.mycursor.fetchone()
+                
+                q2 = f"insert into angle_pip(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
+                db_conn.mycursor.execute(q2)
+                q3 = f"insert into angle_tip(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
+                db_conn.mycursor.execute(q3)
+                q4 = f"insert into angle_mcp(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
+                db_conn.mycursor.execute(q4)
+                tk.messagebox.showinfo("Information", "Your account details have been stored.")
+                SignupPage.destroy(self)
 
-                elif(len(pw)<3):
-                    tk.messagebox.showerror("Information", "Your password needs to be longer than 3 values.")
-                elif(len(phone)<10):
-                    tk.messagebox.showerror("Information", "Your phone needs to be 10 digits long.")
+                
+                
+                    
 
         def validate_user(phone):
             # Checks the text file for a username/password combination.
             try:
                 query = "Select * from patients where PPhone='"+phone+"'"
-                
                 print(query)
                 db_conn.mycursor.execute(query)
                 row = db_conn.mycursor.fetchall()
