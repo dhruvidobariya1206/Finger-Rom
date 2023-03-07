@@ -43,10 +43,12 @@ class SignupPage(tk.Tk):
         
         lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12))  
         lb5.place(x=20, y=200)  
-        gen = StringVar()  
-        Radiobutton(main_frame, text="Male", padx=5,variable=gen, value=1).place(x=200, y=200)  
-        Radiobutton(main_frame, text="Female", padx =10,variable=gen, value=2).place(x=280,y=200)  
-        # Radiobutton(main_frame, text="others", padx=15, variable=vars, value=3).place(x=310,y=240)  
+        gen = IntVar() 
+        # Radiobutton(main_frame, text="Male", padx=5,variable=gen, value=1).place(x=200, y=200)  
+        # Radiobutton(main_frame, text="Female", padx =10,variable=gen, value=2).place(x=280,y=200)  
+        # Radiobutton(main_frame, text="others", padx=15, variable=vars, value=3).place(x=310,y=240)
+        gumb1=Radiobutton(main_frame,text="Male",value = 1,variable = gen).place(x=200, y=200)
+        gumb2=Radiobutton(main_frame,text="Female",value = 2,variable = gen).place(x=280,y=200)  
         
         list_of_grp = ("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")  
         cv = StringVar()  
@@ -85,12 +87,14 @@ class SignupPage(tk.Tk):
             print()
             print()
             
-            print(bloodGrp)
+            # print(bloodGrp)
             print()
             print()
             print()
             
             gender = gen.get()
+            print(gen.get())
+            print(gender)
             validation = validate_user(phone)
             print(user+" "+pw+" "+phone+" "+bloodGrp)
             if pw!=rpw:
