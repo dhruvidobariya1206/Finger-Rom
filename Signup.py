@@ -93,9 +93,9 @@ class SignupPage(tk.Tk):
             gender = gen.get()
             validation = validate_user(phone)
             print(user+" "+pw+" "+phone+" "+bloodGrp)
-            if validation and pw==rpw:
+            if validation and pw==rpw and len(phone)==10:
                 tk.messagebox.showerror("Information", "That Username already exists")
-            else:
+            elif(len(phone)>0 and len(phone)<=10 and pw==rpw):
                 if len(pw) > 3:
                     # credentials = open("credentials.txt", "a")
                     # credentials.write(f"Username,{user},Password,{pw},\n")
@@ -107,8 +107,10 @@ class SignupPage(tk.Tk):
                     tk.messagebox.showinfo("Information", "Your account details have been stored.")
                     SignupPage.destroy(self)
 
-                else:
+                elif(len(pw)<3):
                     tk.messagebox.showerror("Information", "Your password needs to be longer than 3 values.")
+                elif(len(phone)<10):
+                    tk.messagebox.showerror("Information", "Your phone needs to be 10 digits long.")
 
         def validate_user(phone):
             # Checks the text file for a username/password combination.
@@ -128,6 +130,6 @@ class SignupPage(tk.Tk):
 
 
 
-root = SignupPage()
-root.title("Sign Up Page")
-root.mainloop()
+# root = SignupPage()
+# root.title("Sign Up Page")
+# root.mainloop()

@@ -4,15 +4,29 @@ from tkinter import ttk
 from tkinter import *
 from prettytable import PrettyTable
 import subprocess
+# import os
 
 import db_conn
 import tkinter_demo as tkdemo
 import Signup
-import Login
+# import Login
+from Login import *
+# from hcd import *
+# user = Login.getlogin.username
+# print(user)
 
 class Dashboard(tk.Tk):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, uname, phone, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+        
+        
+        query = "Select PId from patients where PPhone ='"+phone+"' and PName='"+uname+"'"
+        print(query)
+        db_conn.mycursor.execute(query)
+        row = db_conn.mycursor.fetchone()
+        user_id = row[0]
+        
+        
         
         main_frame = tk.Frame(self, bg="#8D99AE", height=600, width=800)
         # pack_propagate prevents the window resizing to match the widgets
@@ -27,10 +41,21 @@ class Dashboard(tk.Tk):
                        "background": "dark blue",
                        "foreground": "#EEFFFF"}
         
-        lb1= Label(main_frame, text="Enter Name", width=800, font=("Verdana",20), background="dark blue")  
+        # lg = LoginPage()
+       
+    
+        # print()
+        # print()
+        # print()
+        # print(uname)
+        # print()
+        # print()
+        # print()
+        
+        lb1= Label(main_frame, text="", width=800, font=("Verdana",20), background="dark blue")  
         lb1.place(x=0, y=0)
         
-        lb2 = Label(main_frame, text="username", width=15, height=2, font=("Verdana",12), background="blue")
+        lb2 = Label(main_frame, text=uname, width=15, height=2, font=("Verdana",12), background="blue")
         lb2.place(x=600, y=60)
         
         # lb3 = Label(main_frame, text="Record", width=10, font=("Verdana",10))
@@ -45,18 +70,57 @@ class Dashboard(tk.Tk):
         
     
         def run_script():
-            subprocess.call(['python', 'fing_rom_live.py'])
+            # subprocess.call(['python', f'hcd.py',f'{user_id}'])
+            subprocess.call(["python",'hcd.py',f"{user_id}"])
+            
+            # os.system(f"hcd.py {user_id}")
+            
         
         def list_angles():
+            ang_label = Label(main_frame,text='L PIP', width=5)
+            ang_label.place(x=20, y=100)
+            ang_label = Label(main_frame,text='L DIP', width=5)
+            ang_label.place(x=80, y=100)
+            ang_label = Label(main_frame,text='L MCP', width=5)
+            ang_label.place(x=140, y=100)
+            ang_label = Label(main_frame,text='R PIP', width=5)
+            ang_label.place(x=200, y=100)
+            ang_label = Label(main_frame,text='R DIP', width=5)
+            ang_label.place(x=260, y=100)
+            ang_label = Label(main_frame,text='R MCP', width=5)
+            ang_label.place(x=320, y=100)
             print("Angles")
-            query = "Select * from patients"
-            print(query)
-            db_conn.mycursor.execute(query)
-            row = db_conn.mycursor.fetchall()
-            for ang in row:
-                print(ang)
-                ang = Label(main_frame,text=ang)
-                ang.pack()
+            query1 = f"Select * from angle_pip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 1;"
+            print(query1)
+            db_conn.mycursor.execute(query1)
+            row1 = db_conn.mycursor.fetchone()
+            
+            query2 = f"Select * from angle_tip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 1;"
+            print(query2)
+            db_conn.mycursor.execute(query2)
+            row2 = db_conn.mycursor.fetchone()
+            
+            query3 = f"Select * from angle_mcp where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 1;"
+            print(query3)
+            db_conn.mycursor.execute(query3)
+            row3 = db_conn.mycursor.fetchone()
+            # cnt=1
+            # for ang in row:
+            #     # print(ang)
+            #     for y in range(len(ang)):
+            #         ang_label = Label(main_frame,text=ang[y], width=5)
+            #         ang_label.place(x=20+(60*y), y=100+(40*cnt))
+                    
+                
+                
+                
+                # ang_label = Label(main_frame,text=ang[1], width=5)
+                # ang_label.place(x=20+(25*r), y=100+(40*cnt))
+                # r=r+1
+                # ang_label = Label(main_frame,text=ang[2], width=5)
+                # ang_label.place(x=20+(25*r), y=100+(40*cnt))
+                # ang_label.pack()
+                # cnt=cnt+1
         
         
 # top = Dashboard()

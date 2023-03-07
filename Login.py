@@ -1,6 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
-from tkinter import ttk
+# from tkinter import messagebox
+# from tkinter import ttk
 from tkinter import *
 
 import db_conn
@@ -8,12 +8,20 @@ import tkinter_demo as tkdemo
 import Signup
 import Dashboard
 
+
+
+
+
+
 class LoginPage(tk.Tk):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self,*args, **kwargs):
 
         tk.Tk.__init__(self, *args, **kwargs)
 
+        # self.user=user 
+        # self.phone=phone
+        
         main_frame = tk.Frame(self, bg="#8D99AE", height=450, width=300)  # this is the background
         main_frame.pack(fill="both", expand="true")
 
@@ -56,12 +64,21 @@ class LoginPage(tk.Tk):
             number = en2.get()
             # if your want to run the script as it is set validation = True
             validation = validate(username, password, number)
-            if validation:
+            if validation and len(number)==10:
                 tk.messagebox.showinfo("Login Successful",
                                        "Welcome {}".format(username))
-                Dashboard.Dashboard(username)
+                # user = username
+                # phone = number
+                # print()
+                # print()
+                # print()
+                # print(user)
+                # print()
+                # print()
+                # print()
+                Dashboard.Dashboard(username, number)
                 Signup.top.deiconify()
-                LoginPage.top.destroy()
+                LoginPage.top.deiconify()
                 # LoginPage.top.deiconify()
                 # root.deiconify()          #commented
                 tkdemo.top.destroy()
