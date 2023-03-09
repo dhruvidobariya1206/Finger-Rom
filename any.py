@@ -34,15 +34,49 @@ curr_mcp=np.array(row3[0])
 #     if(max[i]>max_val):
 #         max_val=max[i]
 
-# print(prev)
-# print(curr)
-x=['index','middle','ring','little','thumb']
-plt.plot(x,prev_pip,label="Prev PIP", marker="o", linestyle = 'dashed',c = '#4CAF50')
-plt.plot(x,curr_pip, label="curr PIP", marker="o",c = '#4CAF50')
-plt.plot(x,prev_tip,label="Prev TIP", marker="o", linestyle = 'dashed',c = '#AAAF50')
-plt.plot(x,curr_tip, label="curr TIP", marker="o",c = '#AAAF50')
-plt.plot(x,prev_mcp,label="Prev MCP", marker="o", linestyle = 'dashed',c = '#4CAFAA')
-plt.plot(x,curr_mcp, label="curr MCP", marker="o",c = '#4CAFAA')
+print(prev_tip)
+print(curr_tip)
+
+# ind_prev_pip = prev_pip[0]
+# mid_prev_pip = 
+# print(ind_prev_pip)
+tip=[]
+pip=[]
+mcp=[]
+for i in range(5):
+    col1=[]
+    col1.append(prev_tip[i])
+    col1.append(curr_tip[i])
+    tip.append(col1)
+    
+    col2=[]
+    col2.append(prev_pip[i])
+    col2.append(curr_pip[i])
+    pip.append(col2)
+    
+    col3=[]
+    col3.append(prev_tip[i])
+    col3.append(curr_tip[i])
+    mcp.append(col3)
+
+print(tip)
+print(pip)
+print(mcp)
+
+lbl=['index','middle','ring','little','thumb']
+x=[1,2]
+for i in range(5):
+    plt.plot(x, tip[i], label=f"{lbl[i]}", marker="o")
+
+
+
+# x=['index','middle','ring','little','thumb']
+# plt.plot(x,prev_pip,label="Prev PIP", marker="o", linestyle = 'dashed',c = '#4CAF50')
+# plt.plot(x,curr_pip, label="curr PIP", marker="o",c = '#4CAF50')
+# plt.plot(x,prev_tip,label="Prev TIP", marker="o", linestyle = 'dashed',c = '#AAAF50')
+# plt.plot(x,curr_tip, label="curr TIP", marker="o",c = '#AAAF50')
+# plt.plot(x,prev_mcp,label="Prev MCP", marker="o", linestyle = 'dashed',c = '#4CAFAA')
+# plt.plot(x,curr_mcp, label="curr MCP", marker="o",c = '#4CAFAA')
 plt.xlabel("Finger")
 plt.ylabel("Angle Measure")
 plt.title('Progress')
