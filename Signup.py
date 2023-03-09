@@ -39,22 +39,33 @@ class SignupPage(tk.Tk):
         lb4= Label(main_frame, text="Contact Number", width=15,font=("arial",12))  
         lb4.place(x=20, y=160)  
         en4= Entry(main_frame)  
-        en4.place(x=200, y=160)  
+        en4.place(x=200, y=160)
+        gen = StringVar()  
+        def print_selection():
+            print('you have selected ' + gen.get())
         
         lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12))  
         lb5.place(x=20, y=200)  
-        gen = IntVar() 
+         
         # Radiobutton(main_frame, text="Male", padx=5,variable=gen, value=1).place(x=200, y=200)  
         # Radiobutton(main_frame, text="Female", padx =10,variable=gen, value=2).place(x=280,y=200)  
         # Radiobutton(main_frame, text="others", padx=15, variable=vars, value=3).place(x=310,y=240)
-        gumb1=Radiobutton(main_frame,text="Male",value = 1,variable = gen).place(x=200, y=200)
-        gumb2=Radiobutton(main_frame,text="Female",value = 2,variable = gen).place(x=280,y=200)  
+        gumb1=Radiobutton(main_frame,text="Male",value = "1",variable = gen).place(x=200, y=200)
+        gumb2=Radiobutton(main_frame,text="Female",value = "2",variable = gen).place(x=280,y=200)
         
-        list_of_grp = ("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")  
+        
+        
+        
+        list_of_grp = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
         cv = StringVar()  
         cv.set("A+") 
         drplist= OptionMenu(main_frame, cv, *list_of_grp)  
         drplist.config(width=15)  
+        
+        # menu= StringVar()
+        # menu.set("Select Any Language")
+        # drop= OptionMenu(main_frame, menu,"C++", "Java","Python","JavaScript","Rust","GoLang")
+        # drop.pack()
          
         lb2= Label(main_frame, text="Select Blood Group", width=15,font=("arial",12))  
         lb2.place(x=20,y=240)  
