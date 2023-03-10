@@ -78,10 +78,10 @@ class LoginPage(tk.Tk):
                 # print()
                 
                 Dashboard.Dashboard(username, number)
-                SignupPage.top.deiconify()
+                # SignupPage.top.deiconify()
                 # LoginPage.top.deiconify()
-                LoginPage.destroy(self)
-                # LoginPage.top.deiconify()
+                # LoginPage.destroy(self)
+                top.withdraw()
                 # root.deiconify()          #commented
                 # tkdemo.top.destroy()
                 # top.destroy()
@@ -111,4 +111,4 @@ top = LoginPage()
 top.title("Login Page")
 top.mainloop()
 
-top.destroy()
+# top.destroy()
