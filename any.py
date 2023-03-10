@@ -64,9 +64,26 @@ print(pip)
 print(mcp)
 
 lbl=['index','middle','ring','little','thumb']
-x=[1,2]
+x=['previous','current']
+# plt.subplot(3,1,1)
 for i in range(5):
     plt.plot(x, tip[i], label=f"{lbl[i]}", marker="o")
+plt.xlabel("Progress")
+plt.ylabel("Angle Measure")
+plt.title('Progress')
+plt.legend(loc='upper right')
+plt.show()    
+# plt.subplot(3,1,2)
+for i in range(5):
+    plt.plot(x, pip[i], label=f"{lbl[i]}", marker="o")
+plt.xlabel("Progress")
+plt.ylabel("Angle Measure")
+plt.title('Progress')
+plt.legend(loc='upper right')
+plt.show()  
+# plt.subplot(3,1,3)
+for i in range(5):
+    plt.plot(x, mcp[i], label=f"{lbl[i]}", marker="o")
 
 
 
@@ -77,7 +94,7 @@ for i in range(5):
 # plt.plot(x,curr_tip, label="curr TIP", marker="o",c = '#AAAF50')
 # plt.plot(x,prev_mcp,label="Prev MCP", marker="o", linestyle = 'dashed',c = '#4CAFAA')
 # plt.plot(x,curr_mcp, label="curr MCP", marker="o",c = '#4CAFAA')
-plt.xlabel("Finger")
+plt.xlabel("Progress")
 plt.ylabel("Angle Measure")
 plt.title('Progress')
 plt.legend(loc='upper right')

@@ -156,33 +156,70 @@ class Dashboard(tk.Tk):
             prev_mcp=np.array(row3[1])
             curr_mcp=np.array(row3[0])
             
-            x=['index','middle','ring','little','thumb']
-            plt.plot(x,prev_pip,label="Prev PIP", marker="o", linestyle = 'dashed',c = '#4CAF50')
-            plt.plot(x,curr_pip, label="curr PIP", marker="o",c = '#4CAF50')
-            plt.plot(x,prev_tip,label="Prev TIP", marker="o", linestyle = 'dashed',c = '#AAAF50')
-            plt.plot(x,curr_tip, label="curr TIP", marker="o",c = '#AAAF50')
-            plt.plot(x,prev_mcp,label="Prev MCP", marker="o", linestyle = 'dashed',c = '#4CAFAA')
-            plt.plot(x,curr_mcp, label="curr MCP", marker="o",c = '#4CAFAA')
-            plt.xlabel("Finger")
-            plt.ylabel("Angle Measure")
-            plt.title('Progress')
-            plt.legend(loc='upper right')
-            plt.show()
+            # x=['index','middle','ring','little','thumb']
+            # plt.plot(x,prev_pip,label="Prev PIP", marker="o", linestyle = 'dashed',c = '#4CAF50')
+            # plt.plot(x,curr_pip, label="curr PIP", marker="o",c = '#4CAF50')
+            # plt.plot(x,prev_tip,label="Prev TIP", marker="o", linestyle = 'dashed',c = '#AAAF50')
+            # plt.plot(x,curr_tip, label="curr TIP", marker="o",c = '#AAAF50')
+            # plt.plot(x,prev_mcp,label="Prev MCP", marker="o", linestyle = 'dashed',c = '#4CAFAA')
+            # plt.plot(x,curr_mcp, label="curr MCP", marker="o",c = '#4CAFAA')
+            # plt.xlabel("Finger")
+            # plt.ylabel("Angle Measure")
+            # plt.title('Progress')
+            # plt.legend(loc='upper right')
+            # plt.show()
             
-            # creating the Tkinter canvas
-            # containing the Matplotlib figure
-            canvas = FigureCanvasTkAgg(fig,master = top)  
-            canvas.draw()
+            # # creating the Tkinter canvas
+            # # containing the Matplotlib figure
+            # canvas = FigureCanvasTkAgg(fig,master = top)  
+            # canvas.draw()
   
-            # placing the canvas on the Tkinter window
-            canvas.get_tk_widget().pack()
+            # # placing the canvas on the Tkinter window
+            # canvas.get_tk_widget().pack()
   
-            # creating the Matplotlib toolbar
-            toolbar = NavigationToolbar2Tk(canvas,top)
-            toolbar.update()
+            # # creating the Matplotlib toolbar
+            # toolbar = NavigationToolbar2Tk(canvas,top)
+            # toolbar.update()
   
-            # placing the toolbar on the Tkinter window
-            canvas.get_tk_widget().pack()
+            # # placing the toolbar on the Tkinter window
+            # canvas.get_tk_widget().pack()
+            
+            tip=[]
+            pip=[]
+            mcp=[]
+            for i in range(5):
+                col1=[]
+                col1.append(prev_tip[i])
+                col1.append(curr_tip[i])
+                tip.append(col1)
+    
+                col2=[]
+                col2.append(prev_pip[i])
+                col2.append(curr_pip[i])
+                pip.append(col2)
+
+                col3=[]
+                col3.append(prev_tip[i])
+                col3.append(curr_tip[i])
+                mcp.append(col3)
+            
+            lbl=['index','middle','ring','little','thumb']
+            x=['previous','current']
+            
+            figure1 = plt.Figure(figsize=(6, 5), dpi=100)
+            ax1 = figure1.add_subplot(111)
+            bar1 = FigureCanvasTkAgg(figure1, top)
+            bar1.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
+            # df1 = df1[['country', 'gdp_per_capita']].groupby('country').sum()
+            # df1.plot(kind='bar', legend=True, ax=ax1)
+            for i in range(5):
+                ax1.plot(x, tip[i], label=f"{lbl[i]}", marker="o")
+            ax1.xlabel("Progress")
+            ax1.ylabel("Angle Measure")
+            ax1.title('Progress')
+            ax1.legend(loc='upper right')
+            ax1.show() 
+            # ax1.set_title('Country Vs. GDP Per Capita')
 
             
 # top = Dashboard("dhruvi","9876543210")

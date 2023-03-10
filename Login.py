@@ -79,7 +79,7 @@ class LoginPage(tk.Tk):
                 
                 Dashboard.Dashboard(username, number)
                 SignupPage.top.deiconify()
-                LoginPage.top.deiconify()
+                # LoginPage.top.deiconify()
                 LoginPage.destroy(self)
                 # LoginPage.top.deiconify()
                 # root.deiconify()          #commented
