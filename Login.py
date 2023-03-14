@@ -46,27 +46,31 @@ class LoginPage(tk.Tk):
         en2= Entry(main_frame)  
         en2.place(x=240, y=100) 
         
-        lb3= Label(main_frame, text="Enter Password", width=20, font=("arial",12))  
-        lb3.place(x=20, y=140)  
-        en3= Entry(main_frame, show="*")  
-        en3.place(x=240, y=140)  
+        # lb3= Label(main_frame, text="Enter Password", width=20, font=("arial",12))  
+        # lb3.place(x=20, y=140)  
+        # en3= Entry(main_frame, show="*")  
+        # en3.place(x=240, y=140)  
 
         Button(main_frame, text="Login", width=15, command=lambda: getlogin()).place(x=150,y=200) 
-        Button(main_frame, text="Register", width=15, command=lambda: get_signup()).place(x=300,y=200) 
+        # Button(main_frame, text="Register", width=15, command=lambda: get_signup()).place(x=300,y=200) 
         
-        def get_signup():
-            SignupPage()
+        def get_signup(username, phone):
+            SignupPage(username,phone)
             # SignupPage()
 
         def getlogin():
             username = en1.get()
-            password = en3.get()
+            # password = en3.get()
             number = en2.get()
+            print()
+            print(type(number))
+            print()
+            
             # if your want to run the script as it is set validation = True
-            validation = validate(username, password, number)
+            validation = validate(username, number)
             if validation and len(number)==10:
-                tk.messagebox.showinfo("Login Successful",
-                                       "Welcome {}".format(username))
+                # tk.messagebox.showinfo("Login Successful",
+                                    #    "Welcome {}".format(username))
                 # user = username
                 # phone = number
                 # print()
@@ -86,12 +90,13 @@ class LoginPage(tk.Tk):
                 # tkdemo.top.destroy()
                 # top.destroy()
             else:
-                tk.messagebox.showerror("Information", "The Username or Password you have entered are incorrect ")
+                # tk.messagebox.showerror("Information", "The Username or Password you have entered are incorrect ")
+                get_signup(username,number)
 
-        def validate(username, password, number):
+        def validate(username, number):
             # Checks the text file for a username/password combination.
             try:
-                query = "Select * from patients where PName='"+username+"' and Password='"+password+"' and PPhone='"+number+"'"
+                query = "Select * from patients where PName='"+username+"' and PPhone='"+number+"'"
                 
                 print(query)
                 db_conn.mycursor.execute(query)
@@ -102,7 +107,7 @@ class LoginPage(tk.Tk):
                     return False
                 
             except ConnectionError:
-                print("You need to Register first or amend Line 71 to if True:")
+                # print("You need to Register first or amend Line 71 to if True:")
                 return False
 
 
@@ -111,4 +116,4 @@ top = LoginPage()
 top.title("Login Page")
 top.mainloop()
 
-# top.destroy()
+top.destroy()

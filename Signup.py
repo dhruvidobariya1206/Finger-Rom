@@ -5,10 +5,11 @@ from tkinter import *
 
 import db_conn
 import tkinter_demo as tkdemo
+import Dashboard
 
 class SignupPage(tk.Tk):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, username, phone, *args, **kwargs):
 
         tk.Tk.__init__(self, *args, **kwargs)
 
@@ -17,7 +18,7 @@ class SignupPage(tk.Tk):
         main_frame.pack_propagate(0)
         main_frame.pack(fill="both", expand="true")
 
-        self.geometry("500x500")
+        self.geometry("450x300")
         self.resizable(0, 0)
 
         self.title("Registration")
@@ -26,32 +27,40 @@ class SignupPage(tk.Tk):
                        "background": "#8D99AE",
                        "foreground": "#8D99AE"}
 
-        lb1= Label(main_frame, text="Enter Name", width=15, font=("arial",12))  
-        lb1.place(x=20, y=120)  
-        en1= Entry(main_frame)  
-        en1.place(x=200, y=120)  
+        print()
+        print()
+        print()
+        print(username+"       "+phone)
+        print()
+        print()
+        print()
+
+        # lb1= Label(main_frame, text="Enter Name", width=15, font=("arial",12))  
+        # lb1.place(x=20, y=120)  
+        # en1= Entry(main_frame)  
+        # en1.place(x=200, y=120)  
         
         # lb3= Label(main_frame, text="Enter Email", width=15, font=("arial",12))  
         # lb3.place(x=20, y=160)  
         # en3= Entry(main_frame)  
         # en3.place(x=200, y=160)  
         
-        lb4= Label(main_frame, text="Contact Number", width=15,font=("arial",12))  
-        lb4.place(x=20, y=160)  
-        en4= Entry(main_frame)  
-        en4.place(x=200, y=160)
+        # lb4= Label(main_frame, text="Contact Number", width=15,font=("arial",12))  
+        # lb4.place(x=20, y=160)  
+        # en4= Entry(main_frame)  
+        # en4.place(x=200, y=160)
         gen = StringVar()  
         def print_selection():
             print('you have selected ' + gen.get())
         
         lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12))  
-        lb5.place(x=20, y=200)  
+        lb5.place(x=20, y=60)  
          
         # Radiobutton(main_frame, text="Male", padx=5,variable=gen, value=1).place(x=200, y=200)  
         # Radiobutton(main_frame, text="Female", padx =10,variable=gen, value=2).place(x=280,y=200)  
         # Radiobutton(main_frame, text="others", padx=15, variable=vars, value=3).place(x=310,y=240)
-        gumb1=Radiobutton(main_frame,text="Male",value = "1",variable = gen).place(x=200, y=200)
-        gumb2=Radiobutton(main_frame,text="Female",value = "2",variable = gen).place(x=280,y=200)
+        gumb1=Radiobutton(main_frame,text="Male",value = "1",variable = gen).place(x=240, y=60)
+        gumb2=Radiobutton(main_frame,text="Female",value = "2",variable = gen).place(x=320,y=60)
         
         
         
@@ -68,20 +77,20 @@ class SignupPage(tk.Tk):
         # drop.pack()
          
         lb2= Label(main_frame, text="Select Blood Group", width=15,font=("arial",12))  
-        lb2.place(x=20,y=240)  
-        drplist.place(x=200, y=240)  
+        lb2.place(x=20,y=100)  
+        drplist.place(x=240, y=100)  
         
-        lb6= Label(main_frame, text="Enter Password", width=15,font=("arial",12))  
-        lb6.place(x=20, y=280)  
-        en6= Entry(main_frame, show='*')  
-        en6.place(x=200, y=280)  
+        # lb6= Label(main_frame, text="Enter Password", width=15,font=("arial",12))  
+        # lb6.place(x=20, y=280)  
+        # en6= Entry(main_frame, show='*')  
+        # en6.place(x=200, y=280)  
         
-        lb7= Label(main_frame, text="Re-Enter Password", width=15,font=("arial",12))  
-        lb7.place(x=22, y=320)  
-        en7 =Entry(main_frame, show='*')  
-        en7.place(x=200, y=320)  
+        # lb7= Label(main_frame, text="Re-Enter Password", width=15,font=("arial",12))  
+        # lb7.place(x=22, y=320)  
+        # en7 =Entry(main_frame, show='*')  
+        # en7.place(x=200, y=320)  
         
-        Button(main_frame, text="Register", width=15, command=lambda: signup()).place(x=200,y=360) 
+        Button(main_frame, text="Register", width=15, command=lambda: signup()).place(x=150,y=200) 
 
 
 
@@ -89,10 +98,10 @@ class SignupPage(tk.Tk):
 
         def signup():
             # Creates a text file with the Username and password
-            user = en1.get()
-            pw = en6.get()
-            rpw = en7.get()
-            phone = en4.get()
+            user = username
+            # pw = en6.get()
+            # rpw = en7.get()
+            # phone = en4.get()
             bloodGrp = cv.get()
             print()
             print()
@@ -107,13 +116,13 @@ class SignupPage(tk.Tk):
             print(gen.get())
             print(gender)
             validation = validate_user(phone)
-            print(user+" "+pw+" "+phone+" "+bloodGrp)
-            if pw!=rpw:
-                tk.messagebox.showerror("Information", "Please enter same password.")
-            elif(len(phone)!=10):
+            # print(user+" "+pw+" "+phone+" "+bloodGrp)
+            # if pw!=rpw:
+            #     tk.messagebox.showerror("Information", "Please enter same password.")
+            if(len(phone)!=10):
                 tk.messagebox.showerror("Information", "Your phone number needs to be 10 digits long.")
-            elif(len(pw)<3):
-                tk.messagebox.showerror("Information", "Your password needs to be longer than 3 values.")
+            # elif(len(pw)<3):
+            #     tk.messagebox.showerror("Information", "Your password needs to be longer than 3 values.")
             elif validation:
                 tk.messagebox.showerror("Information", "That Username already exists")
             else:
@@ -122,7 +131,7 @@ class SignupPage(tk.Tk):
                     # credentials.write(f"Username,{user},Password,{pw},\n")
                     # credentials.close()
                     
-                query = "insert into patients(PName, PPhone, Gender, PBlood, Password) values('"+user+"','"+phone+"','"+gender+"','"+bloodGrp+"','"+pw+"')"
+                query = "insert into patients(PName, PPhone, Gender, PBlood) values('"+username+"','"+phone+"','"+gender+"','"+bloodGrp+"')"
                 print(query)
                 db_conn.mycursor.execute(query)
                 
@@ -138,6 +147,7 @@ class SignupPage(tk.Tk):
                 db_conn.mycursor.execute(q4)
                 tk.messagebox.showinfo("Information", "Your account details have been stored.")
                 SignupPage.destroy(self)
+                Dashboard.Dashboard(username, phone)
 
                 
                 
@@ -160,6 +170,6 @@ class SignupPage(tk.Tk):
 
 
 
-# root = SignupPage()
+# root = SignupPage('tree','9876598630')
 # root.title("Sign Up Page")
 # root.mainloop()

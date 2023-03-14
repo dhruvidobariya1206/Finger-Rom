@@ -112,7 +112,7 @@ class Dashboard(tk.Tk):
             row3 = db_conn.mycursor.fetchone()
             
             for ang in range(5):
-                num = Label(main_frame, text="111", widht=10)
+                num = Label(main_frame, text='111', widht=10)
                 num.place(x=20,y=140+(40*ang))
                 
                 value1 = Label(main_frame,text=row1[2+ang], width=10)
@@ -132,9 +132,12 @@ class Dashboard(tk.Tk):
             
             query1 = f"Select ind, mid, ring, little, thumb from angle_pip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
             # print(query1)
-            db_conn.mycursor.execute(query1)
+            cnt=db_conn.mycursor.execute(query1)
             row1 = db_conn.mycursor.fetchall()
 
+            if(cnt!=2):
+                tk.messagebox.showinfo("Alert","Please record the angles")
+            
             query2 = f"Select ind, mid, ring, little, thumb from angle_tip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
             # print(query1)
             db_conn.mycursor.execute(query2)
@@ -229,8 +232,8 @@ class Dashboard(tk.Tk):
             print("End")
             
             
-top = Dashboard("dhruvi","9876543210")
-top.title("Dashboard")
-top.mainloop()
+# top = Dashboard("dhruvi","9876543210")
+# top.title("Dashboard")
+# top.mainloop()
 
-top.destroy()
+# top.destroy()
