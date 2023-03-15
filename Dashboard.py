@@ -50,51 +50,66 @@ class Dashboard(tk.Tk):
                        "foreground": "#EEFFFF"}
         
         
-        lb1= Label(main_frame, text="", width=800, font=("Verdana",20), background="dark blue")  
+        lb1= Label(main_frame, text="", width=800, font=("Verdana",22), background="dark blue")  
         lb1.place(x=0, y=0)
         
-        Button(main_frame, text="List Angles", width=18, command=lambda: list_angles()).place(x=20,y=50) 
+         
         
         lb2 = Label(main_frame, text=uname, width=15, height=2, font=("Verdana",12), background="blue")
-        lb2.place(x=600, y=60)
+        lb2.place(x=1050, y=0)
         
         # lb3 = Label(main_frame, text="Record", width=10, font=("Verdana",10))
         # lb3.place(x=30,y=140)
         
-        Button(main_frame, text="Record", width=18, command=lambda: run_script()).place(x=600,y=150) 
+        Button(main_frame, text="Record", width=18, command=lambda: run_script()).place(x=50,y=70) 
         
-        Button(main_frame, text="Veiw Progress", width=18, command=lambda: view_progress()).place(x=600,y=240) 
+        Button(main_frame, text="List Angles", width=18, command=lambda: list_angles()).place(x=50,y=120)
+        
+        Button(main_frame, text="Veiw Progress", width=18, command=lambda: view_progress()).place(x=50,y=170) 
+        
+        search_entry=Entry(main_frame, text="Search", width=10, font=("Verdana",18))
+        search_entry.place(x=900, y=70)
+        # search_entry.insert(0,'Search')
+        # search_icon = tk.PhotoImage(file="search_icon.png")
+        # search_btn = Button(main_frame, image=search_icon, command=lambda: search())
+        # search_btn.place(x=100,y=70)
+        Button(main_frame, text="Search", width=10, command=lambda: search()).place(x=1060,y=70) 
+        
         
     
         def run_script():
             # subprocess.call(['python', f'hcd.py',f'{user_id}'])
             subprocess.call(["python",'hcd.py',f"{user_id}"])
+            list_angles()
+            view_progress()
             
-            
+        
+        def search():
+            print("search")    
             
         
         def list_angles():
-            ang_label1 = Label(main_frame,text='Sr No.', width=10)
-            ang_label1.place(x=20, y=100)
+            # ang_label1 = Label(main_frame,text='Sr No.', width=10)
+            # ang_label1.place(x=20, y=100)
             ang_label1 = Label(main_frame,text='Finger', width=10)
-            ang_label1.place(x=120, y=100)
+            ang_label1.place(x=350, y=70)
             ang_label2 = Label(main_frame,text='PIP', width=10)
-            ang_label2.place(x=220, y=100)
+            ang_label2.place(x=450, y=70)
             ang_label3 = Label(main_frame,text='DIP', width=10)
-            ang_label3.place(x=320, y=100)
+            ang_label3.place(x=550, y=70)
             ang_label4 = Label(main_frame,text='MCP', width=10)
-            ang_label4.place(x=420, y=100)
+            ang_label4.place(x=650, y=70)
             
             fin_label1 = Label(main_frame,text='Index', width=10)
-            fin_label1.place(x=120, y=140)
+            fin_label1.place(x=350, y=110)
             fin_label2 = Label(main_frame,text='Middle', width=10)
-            fin_label2.place(x=120, y=180)
+            fin_label2.place(x=350, y=150)
             fin_label3 = Label(main_frame,text='Ring', width=10)
-            fin_label3.place(x=120, y=220)
+            fin_label3.place(x=350, y=190)
             fin_label4 = Label(main_frame,text='Little', width=10)
-            fin_label4.place(x=120, y=260)
+            fin_label4.place(x=350, y=230)
             fin_label5 = Label(main_frame,text='Thumb', width=10)
-            fin_label5.place(x=120, y=300)
+            fin_label5.place(x=350, y=270)
             # print("Angles")
             query1 = f"Select * from angle_pip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 1;"
             print(query1)
@@ -112,17 +127,17 @@ class Dashboard(tk.Tk):
             row3 = db_conn.mycursor.fetchone()
             
             for ang in range(5):
-                num = Label(main_frame, text='111', widht=10)
-                num.place(x=20,y=140+(40*ang))
+                # num = Label(main_frame, text='111', widht=10)
+                # num.place(x=20,y=140+(40*ang))
                 
                 value1 = Label(main_frame,text=row1[2+ang], width=10)
-                value1.place(x=120, y=140+(40*ang))
+                value1.place(x=450, y=110+(40*ang))
                 
                 value2 = Label(main_frame,text=row2[2+ang], width=10)
-                value2.place(x=220, y=140+(40*ang))
+                value2.place(x=550, y=110+(40*ang))
                 
                 value3 = Label(main_frame,text=row3[2+ang], width=10)
-                value3.place(x=320, y=140+(40*ang))
+                value3.place(x=650, y=110+(40*ang))
                     
         def view_progress():
             print("View Progress")
@@ -132,9 +147,10 @@ class Dashboard(tk.Tk):
             
             query1 = f"Select ind, mid, ring, little, thumb from angle_pip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
             # print(query1)
-            cnt=db_conn.mycursor.execute(query1)
+            db_conn.mycursor.execute(query1)
+            cnt = db_conn.mycursor.rowcount
             row1 = db_conn.mycursor.fetchall()
-
+            
             if(cnt!=2):
                 tk.messagebox.showinfo("Alert","Please record the angles")
             
@@ -189,9 +205,9 @@ class Dashboard(tk.Tk):
             pip = pd.DataFrame(pip)
             mcp = pd.DataFrame(mcp)
             
-            print(pip)
-            print(tip)
-            print(mcp)
+            # print(pip)
+            # print(tip)
+            # print(mcp)
             
             lbl=['index','middle','ring','little','thumb']
             x=['previous','current']
@@ -230,6 +246,8 @@ class Dashboard(tk.Tk):
             
             
             print("End")
+            
+        # main_frame.destroy()
             
             
 # top = Dashboard("dhruvi","9876543210")
