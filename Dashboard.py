@@ -50,12 +50,15 @@ class Dashboard(tk.Tk):
                        "foreground": "#EEFFFF"}
         
         
-        lb1= Label(main_frame, text="", width=800, font=("Verdana",22), background="dark blue")  
+        lb1= Label(main_frame, text="", width=800, height=1, font=("Verdana",22), background="dark blue")  
         lb1.place(x=0, y=0)
         
          
         
         lb2 = Label(main_frame, text=uname, width=15, height=2, font=("Verdana",12), background="blue")
+        lb2.place(x=0, y=0)
+        
+        lb2 = Label(main_frame, text="Logout", width=15, height=2, font=("Verdana",12), background="blue")
         lb2.place(x=1050, y=0)
         
         # lb3 = Label(main_frame, text="Record", width=10, font=("Verdana",10))
@@ -67,13 +70,13 @@ class Dashboard(tk.Tk):
         
         Button(main_frame, text="Veiw Progress", width=18, command=lambda: view_progress()).place(x=50,y=170) 
         
-        search_entry=Entry(main_frame, text="Search", width=10, font=("Verdana",18))
-        search_entry.place(x=900, y=70)
+        # search_entry=Entry(main_frame, text="Search", width=10, font=("Verdana",18))
+        # search_entry.place(x=900, y=70)
         # search_entry.insert(0,'Search')
         # search_icon = tk.PhotoImage(file="search_icon.png")
         # search_btn = Button(main_frame, image=search_icon, command=lambda: search())
         # search_btn.place(x=100,y=70)
-        Button(main_frame, text="Search", width=10, command=lambda: search()).place(x=1060,y=70) 
+        # Button(main_frame, text="Search", width=10, command=lambda: search()).place(x=1060,y=70) 
         
         
     
