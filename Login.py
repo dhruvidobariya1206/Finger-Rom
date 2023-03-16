@@ -98,7 +98,7 @@ class LoginPage(tk.Tk):
             try:
                 query = "Select * from patients where PName='"+username+"' and PPhone='"+number+"'"
                 
-                print(query)
+                # print(query)
                 db_conn.mycursor.execute(query)
                 row = db_conn.mycursor.fetchall()
                 if(len(row)==1):

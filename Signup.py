@@ -168,7 +168,7 @@ class SignupPage(tk.Tk):
             # Checks the text file for a username/password combination.
             try:
                 query = "Select * from patients where PPhone='"+phone+"'"
-                print(query)
+                # print(query)
                 db_conn.mycursor.execute(query)
                 row = db_conn.mycursor.fetchall()
                 if(len(row)==1):

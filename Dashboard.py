@@ -15,8 +15,8 @@ import pandas as pd
 import db_conn
 import tkinter_demo as tkdemo
 import Signup
-import Login as lg
-from Login import *
+import Login
+# from Login import *
 
 
 # from hcd import *
@@ -29,7 +29,7 @@ class Dashboard(tk.Tk):
         
         
         query = "Select PId from patients where PPhone ='"+phone+"' and PName='"+uname+"'"
-        print(query)
+        # print(query)
         db_conn.mycursor.execute(query)
         row = db_conn.mycursor.fetchone()
         user_id = row[0]
@@ -58,9 +58,8 @@ class Dashboard(tk.Tk):
         lb2 = Label(main_frame, text=uname, width=15, height=2, font=("Verdana",12), background="blue")
         lb2.place(x=0, y=0)
         
-        lb2 = Label(main_frame, text="Logout", width=15, height=2, font=("Verdana",12), background="blue")
-        lb2.place(x=1050, y=0)
-        
+        logout = Button(main_frame, text="Logout", width=15, height=2, font=("Verdana",12), background="blue", command=lambda: logout())
+        logout.place(x=1050, y=0)
         # lb3 = Label(main_frame, text="Record", width=10, font=("Verdana",10))
         # lb3.place(x=30,y=140)
         
@@ -87,8 +86,17 @@ class Dashboard(tk.Tk):
             view_progress()
             
         
-        def search():
-            print("search")    
+        def logout():
+            # print("search") 
+            response = messagebox.askokcancel("Logout", "Are you sure you want to logout?")
+            if response:
+                Dashboard.destroy(self)
+                top = Login.LoginPage()
+                top.title("Login Page")
+                top.mainloop()
+                
+            # LoginPage()   
+            # Dashboard.destroy(self)
             
         
         def list_angles():
