@@ -36,7 +36,7 @@ class Dashboard(tk.Tk):
         
         
         
-        main_frame = tk.Frame(self, bg="#8D99AE", height=700, width=800)
+        main_frame = tk.Frame(self, bg="#C0CFEB", height=700, width=800)
         # pack_propagate prevents the window resizing to match the widgets
         main_frame.pack_propagate(0)
         main_frame.pack(fill="both", expand="true")
@@ -50,15 +50,15 @@ class Dashboard(tk.Tk):
                        "foreground": "#EEFFFF"}
         
         
-        lb1= Label(main_frame, text="", width=800, height=1, font=("Verdana",22), background="dark blue")  
+        lb1= Label(main_frame, text="", width=800, height=1, font=("Verdana",22), background="#1c4966")  
         lb1.place(x=0, y=0)
         
          
         
-        lb2 = Label(main_frame, text=uname, width=15, height=2, font=("Verdana",12), background="blue")
+        lb2 = Label(main_frame, text=uname, width=15, height=2, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966")
         lb2.place(x=0, y=0)
         
-        logout = Button(main_frame, text="Logout", width=15, height=2, font=("Verdana",12), background="blue", command=lambda: logout())
+        logout = Button(main_frame, text="Logout", width=15, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: logout())
         logout.place(x=1050, y=0)
         # lb3 = Label(main_frame, text="Record", width=10, font=("Verdana",10))
         # lb3.place(x=30,y=140)
@@ -141,7 +141,7 @@ class Dashboard(tk.Tk):
                 # num = Label(main_frame, text='111', widht=10)
                 # num.place(x=20,y=140+(40*ang))
                 if(ang==4):
-                    value1 = Label(main_frame,text=row1[2+ang], width=20)
+                    value1 = Label(main_frame,text=row1[2+ang], width=22)
                     value1.place(x=450, y=110+(40*ang))
                     value3 = Label(main_frame,text=row3[2+ang], width=10)
                     value3.place(x=650, y=110+(40*ang))
