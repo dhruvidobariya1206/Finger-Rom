@@ -27,13 +27,13 @@ class SignupPage(tk.Tk):
                        "background": "#8D99AE",
                        "foreground": "#8D99AE"}
 
-        print()
-        print()
-        print()
-        print(username+"       "+phone)
-        print()
-        print()
-        print()
+        # print()
+        # print()
+        # print()
+        # print(username+"       "+phone)
+        # print()
+        # print()
+        # print()
 
         # lb1= Label(main_frame, text="Enter Name", width=15, font=("arial",12))  
         # lb1.place(x=20, y=120)  
@@ -49,9 +49,7 @@ class SignupPage(tk.Tk):
         # lb4.place(x=20, y=160)  
         # en4= Entry(main_frame)  
         # en4.place(x=200, y=160)
-        gen = StringVar()  
-        def print_selection():
-            print('you have selected ' + gen.get())
+        gen = IntVar()  
         
         lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12))  
         lb5.place(x=20, y=60)  
@@ -62,12 +60,25 @@ class SignupPage(tk.Tk):
         gumb1=Radiobutton(main_frame,text="Male",value = "1",variable = gen).place(x=240, y=60)
         gumb2=Radiobutton(main_frame,text="Female",value = "2",variable = gen).place(x=320,y=60)
         
-        
+        lb2= Label(main_frame, text="Select Blood Group", width=15,font=("arial",12))  
+        lb2.place(x=20,y=100)
+        # options = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+        # selected_option = tk.StringVar()
+        # selected_option.set(options[0])
+        # def update_selected_option(*args):
+        #     selected_option.set(dropdown.get())
+        # dropdown = tk.OptionMenu(main_frame, selected_option, *options)
+        # dropdown.place(x=240, y=100)
+        # selected_option.trace("w", update_selected_option)
         
         
         list_of_grp = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
         cv = StringVar()  
-        cv.set("A+") 
+        cv.set(list_of_grp[0])
+        
+        def update_selected_option(*args):
+            cv.set(drplist.get())
+         
         drplist= OptionMenu(main_frame, cv, *list_of_grp)  
         drplist.config(width=15)  
         
@@ -76,9 +87,9 @@ class SignupPage(tk.Tk):
         # drop= OptionMenu(main_frame, menu,"C++", "Java","Python","JavaScript","Rust","GoLang")
         # drop.pack()
          
-        lb2= Label(main_frame, text="Select Blood Group", width=15,font=("arial",12))  
-        lb2.place(x=20,y=100)  
-        drplist.place(x=240, y=100)  
+          
+        drplist.place(x=240, y=100) 
+        cv.trace("w", update_selected_option) 
         
         # lb6= Label(main_frame, text="Enter Password", width=15,font=("arial",12))  
         # lb6.place(x=20, y=280)  
@@ -107,14 +118,14 @@ class SignupPage(tk.Tk):
             print()
             print()
             
-            # print(bloodGrp)
+            print(bloodGrp)
             print()
             print()
             print()
             
             gender = gen.get()
             print(gen.get())
-            print(gender)
+            print("gennder"+gender)
             validation = validate_user(phone)
             # print(user+" "+pw+" "+phone+" "+bloodGrp)
             # if pw!=rpw:
