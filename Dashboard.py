@@ -140,7 +140,13 @@ class Dashboard(tk.Tk):
             for ang in range(5):
                 # num = Label(main_frame, text='111', widht=10)
                 # num.place(x=20,y=140+(40*ang))
-                
+                if(ang==4):
+                    value1 = Label(main_frame,text=row1[2+ang], width=20)
+                    value1.place(x=450, y=110+(40*ang))
+                    value3 = Label(main_frame,text=row3[2+ang], width=10)
+                    value3.place(x=650, y=110+(40*ang))
+                    break
+                    
                 value1 = Label(main_frame,text=row1[2+ang], width=10)
                 value1.place(x=450, y=110+(40*ang))
                 

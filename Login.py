@@ -45,7 +45,7 @@ class LoginPage(tk.Tk):
         lb2.place(x=20, y=100)  
         en2= Entry(main_frame)  
         en2.place(x=240, y=100) 
-        
+        # , validate="key", validatecommand=(validation, '%S')
         # lb3= Label(main_frame, text="Enter Password", width=20, font=("arial",12))  
         # lb3.place(x=20, y=140)  
         # en3= Entry(main_frame, show="*")  
@@ -80,8 +80,9 @@ class LoginPage(tk.Tk):
                 # print()
                 # print()
                 # print()
-                
+                LoginPage.destroy(self)
                 Dashboard.Dashboard(username, number)
+                
                 # SignupPage.top.deiconify()
                 # LoginPage.top.deiconify()
                 # LoginPage.destroy(self)
