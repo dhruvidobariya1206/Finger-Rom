@@ -60,36 +60,11 @@ class SignupPage(tk.Tk):
         gumb1=Radiobutton(main_frame,text="Male",value = "1",variable = gen).place(x=240, y=60)
         gumb2=Radiobutton(main_frame,text="Female",value = "2",variable = gen).place(x=320,y=60)
         
-        lb2= Label(main_frame, text="Select Blood Group", width=15,font=("arial",12))  
+        lb2= Label(main_frame, text="Age", width=15,font=("arial",12))  
         lb2.place(x=20,y=100)
-        # options = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
-        # selected_option = tk.StringVar()
-        # selected_option.set(options[0])
-        # def update_selected_option(*args):
-        #     selected_option.set(dropdown.get())
-        # dropdown = tk.OptionMenu(main_frame, selected_option, *options)
-        # dropdown.place(x=240, y=100)
-        # selected_option.trace("w", update_selected_option)
+        en2= Entry(main_frame, show='*')  
+        en2.place(x=240, y=100)
         
-        
-        list_of_grp = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
-        cv = StringVar()  
-        cv.set(list_of_grp[0])
-        
-        def update_selected_option(*args):
-            cv.set(drplist.get())
-         
-        drplist= OptionMenu(main_frame, cv, *list_of_grp)  
-        drplist.config(width=15)  
-        
-        # menu= StringVar()
-        # menu.set("Select Any Language")
-        # drop= OptionMenu(main_frame, menu,"C++", "Java","Python","JavaScript","Rust","GoLang")
-        # drop.pack()
-         
-          
-        drplist.place(x=240, y=100) 
-        cv.trace("w", update_selected_option) 
         
         # lb6= Label(main_frame, text="Enter Password", width=15,font=("arial",12))  
         # lb6.place(x=20, y=280)  
@@ -113,15 +88,8 @@ class SignupPage(tk.Tk):
             # pw = en6.get()
             # rpw = en7.get()
             # phone = en4.get()
-            bloodGrp = cv.get()
-            print()
-            print()
-            print()
+            age = en2.get()
             
-            print(bloodGrp)
-            print()
-            print()
-            print()
             
             gender = gen.get()
             print(gen.get())
@@ -142,7 +110,7 @@ class SignupPage(tk.Tk):
                     # credentials.write(f"Username,{user},Password,{pw},\n")
                     # credentials.close()
                     
-                query = "insert into patients(PName, PPhone, Gender, PBlood) values('"+username+"','"+phone+"','"+gender+"','"+bloodGrp+"')"
+                query = "insert into patients(PName, PPhone, Gender, Age) values('"+username+"','"+phone+"','"+gender+"','"+age+"')"
                 print(query)
                 db_conn.mycursor.execute(query)
                 
