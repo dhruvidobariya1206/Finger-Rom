@@ -36,8 +36,8 @@ r3 = Radiobutton(win, text="Java", variable=radio, value=3, command=selection)
 r3.pack(anchor=N)
 
 # Define a label widget
-selection()
+# selection()
 label = Label(win)
 label.pack()
-print("main " + gender)
+# print("main " + gender)
 win.mainloop()
