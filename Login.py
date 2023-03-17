@@ -35,6 +35,9 @@ class LoginPage(tk.Tk):
 
         # frame_login = tk.Frame(main_frame, bg="dark blue", relief="groove", bd=2)  # this is the frame that holds all the login details and buttons
         # frame_login.place(rely=0.30, relx=0.17, height=200, width=420)
+        def only_numbers(char):
+            return char.isdigit()
+        validation = main_frame.register(only_numbers)
 
         lb1= Label(main_frame, text="Enter Name", width=20, font=("arial",12), background="#9EAABF")  
         lb1.place(x=20, y=60)  
@@ -43,7 +46,7 @@ class LoginPage(tk.Tk):
         
         lb2= Label(main_frame, text="Enter Phone Number", width=20, font=("arial",12), background="#9EAABF")  
         lb2.place(x=20, y=100)  
-        en2= Entry(main_frame)  
+        en2= Entry(main_frame, validate="key", validatecommand=(validation, '%S'))  
         en2.place(x=240, y=100) 
         # , validate="key", validatecommand=(validation, '%S')
         # lb3= Label(main_frame, text="Enter Password", width=20, font=("arial",12))  
@@ -53,6 +56,8 @@ class LoginPage(tk.Tk):
 
         Button(main_frame, text="Login", width=15, command=lambda: getlogin(), background="#9EAABF").place(x=150,y=200) 
         # Button(main_frame, text="Register", width=15, command=lambda: get_signup()).place(x=300,y=200) 
+        
+        
         
         def get_signup(username, phone):
             SignupPage(username,phone)
@@ -80,6 +85,7 @@ class LoginPage(tk.Tk):
                     # top.destroy()
                 else:
                     # tk.messagebox.showerror("Information", "The Username or Password you have entered are incorrect ")
+                    LoginPage.destroy(self)
                     get_signup(username,number)
 
         def validate(username, number):

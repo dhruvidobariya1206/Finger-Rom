@@ -6,6 +6,7 @@ from tkinter import *
 import db_conn
 import tkinter_demo as tkdemo
 import Dashboard
+import Login
 
 gender = ""
 
@@ -40,29 +41,25 @@ class SignupPage(tk.Tk):
         radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection, background="#9EAABF")
         radio_f.place(x=320,y=60)
         
-        
+        def only_numbers(char):
+            return char.isdigit()
+        validation = main_frame.register(only_numbers)
         
         lb2= Label(main_frame, text="Age", width=15,font=("arial",12), background="#9EAABF")  
         lb2.place(x=20,y=100)
-        en2= Entry(main_frame)  
+        en2= Entry(main_frame, validate="key", validatecommand=(validation, '%S'))  
         en2.place(x=240, y=100)
+          
         
-        
-        # lb6= Label(main_frame, text="Enter Password", width=15,font=("arial",12))  
-        # lb6.place(x=20, y=280)  
-        # en6= Entry(main_frame, show='*')  
-        # en6.place(x=200, y=280)  
-        
-        # lb7= Label(main_frame, text="Re-Enter Password", width=15,font=("arial",12))  
-        # lb7.place(x=22, y=320)  
-        # en7 =Entry(main_frame, show='*')  
-        # en7.place(x=200, y=320)  
-        
-        Button(main_frame, text="Register", width=15, command=lambda: signup(), background="#9EAABF").place(x=150,y=200) 
+        Button(main_frame, text="Back", width=15, command=lambda: back(), background="#9EAABF").place(x=100,y=200) 
+        Button(main_frame, text="Register", width=15, command=lambda: signup(), background="#9EAABF").place(x=250,y=200) 
 
         # print(str(gen.get()))
 
-        
+        def back():
+            SignupPage.destroy(self)
+            Login.LoginPage()
+            
 
         def signup():
             # Creates a text file with the Username and password
