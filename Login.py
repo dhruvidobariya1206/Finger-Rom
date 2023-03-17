@@ -22,7 +22,7 @@ class LoginPage(tk.Tk):
         # self.user=user 
         # self.phone=phone
         
-        main_frame = tk.Frame(self, bg="#8D99AE", height=450, width=300)  # this is the background
+        main_frame = tk.Frame(self, bg="#9EAABF", height=450, width=300)  # this is the background
         main_frame.pack(fill="both", expand="true")
 
         self.geometry("450x300")  # Sets window size to 626w x 431h pixels

@@ -15,7 +15,7 @@ class SignupPage(tk.Tk):
 
         tk.Tk.__init__(self, *args, **kwargs)
 
-        main_frame = tk.Frame(self, bg="#8D99AE", height=150, width=250)
+        main_frame = tk.Frame(self, bg="#9EAABF", height=150, width=250)
         # pack_propagate prevents the window resizing to match the widgets
         main_frame.pack_propagate(0)
         main_frame.pack(fill="both", expand="true")
@@ -28,45 +28,17 @@ class SignupPage(tk.Tk):
         text_styles = {"font": ("Verdana", 10),
                        "background": "#8D99AE",
                        "foreground": "#8D99AE"}
-
-        # print()
-        # print()
-        # print()
-        # print(username+"       "+phone)
-        # print()
-        # print()
-        # print()
-
-        # lb1= Label(main_frame, text="Enter Name", width=15, font=("arial",12))  
-        # lb1.place(x=20, y=120)  
-        # en1= Entry(main_frame)  
-        # en1.place(x=200, y=120)  
-        
-        # lb3= Label(main_frame, text="Enter Email", width=15, font=("arial",12))  
-        # lb3.place(x=20, y=160)  
-        # en3= Entry(main_frame)  
-        # en3.place(x=200, y=160)  
-        
-        # lb4= Label(main_frame, text="Contact Number", width=15,font=("arial",12))  
-        # lb4.place(x=20, y=160)  
-        # en4= Entry(main_frame)  
-        # en4.place(x=200, y=160)
-        
         def selection():
             print("selected"+str(gen.get()))
-        
         gen = IntVar()  
-        
+        print("init"+str(gen.get()))
         lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12))  
         lb5.place(x=20, y=60)  
-         
-        # Radiobutton(main_frame, text="Male", padx=5,variable=gen, value=1).place(x=200, y=200)  
-        # Radiobutton(main_frame, text="Female", padx =10,variable=gen, value=2).place(x=280,y=200)  
-        # Radiobutton(main_frame, text="others", padx=15, variable=vars, value=3).place(x=310,y=240)
-        gumb1=Radiobutton(main_frame,text="Male",variable = gen, value=1,command=selection)
-        gumb1.place(x=240, y=60)
-        gumb2=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection)
-        gumb2.place(x=320,y=60)
+        
+        radio_m=Radiobutton(main_frame,text="Male",variable = gen, value=1,command=selection)
+        radio_m.place(x=240, y=60)
+        radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection)
+        radio_f.place(x=320,y=60)
         
         
         
@@ -88,9 +60,9 @@ class SignupPage(tk.Tk):
         
         Button(main_frame, text="Register", width=15, command=lambda: signup()).place(x=150,y=200) 
 
-        print(str(gen.get()))
+        # print(str(gen.get()))
 
-
+        
 
         def signup():
             # Creates a text file with the Username and password
