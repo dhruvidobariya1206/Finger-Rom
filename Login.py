@@ -22,7 +22,7 @@ class LoginPage(tk.Tk):
         # self.user=user 
         # self.phone=phone
         
-        main_frame = tk.Frame(self, bg="#9EAABF", height=450, width=300)  # this is the background
+        main_frame = tk.Frame(self, bg="#1c4966", height=450, width=300)  # this is the background
         main_frame.pack(fill="both", expand="true")
 
         self.geometry("450x300")  # Sets window size to 626w x 431h pixels
@@ -36,12 +36,12 @@ class LoginPage(tk.Tk):
         # frame_login = tk.Frame(main_frame, bg="dark blue", relief="groove", bd=2)  # this is the frame that holds all the login details and buttons
         # frame_login.place(rely=0.30, relx=0.17, height=200, width=420)
 
-        lb1= Label(main_frame, text="Enter Name", width=20, font=("arial",12), background="#1c4966")  
+        lb1= Label(main_frame, text="Enter Name", width=20, font=("arial",12), background="#9EAABF")  
         lb1.place(x=20, y=60)  
         en1= Entry(main_frame)  
         en1.place(x=240, y=60)
         
-        lb2= Label(main_frame, text="Enter Phone Number", width=20, font=("arial",12), background="#1c4966")  
+        lb2= Label(main_frame, text="Enter Phone Number", width=20, font=("arial",12), background="#9EAABF")  
         lb2.place(x=20, y=100)  
         en2= Entry(main_frame)  
         en2.place(x=240, y=100) 
@@ -51,7 +51,7 @@ class LoginPage(tk.Tk):
         # en3= Entry(main_frame, show="*")  
         # en3.place(x=240, y=140)  
 
-        Button(main_frame, text="Login", width=15, command=lambda: getlogin(), background="#1c4966").place(x=150,y=200) 
+        Button(main_frame, text="Login", width=15, command=lambda: getlogin(), background="#9EAABF").place(x=150,y=200) 
         # Button(main_frame, text="Register", width=15, command=lambda: get_signup()).place(x=300,y=200) 
         
         def get_signup(username, phone):
@@ -62,37 +62,25 @@ class LoginPage(tk.Tk):
             username = en1.get()
             # password = en3.get()
             number = en2.get()
-            print()
-            print(type(number))
-            print()
-            
-            # if your want to run the script as it is set validation = True
-            validation = validate(username, number)
-            if validation and len(number)==10:
-                # tk.messagebox.showinfo("Login Successful",
-                                    #    "Welcome {}".format(username))
-                # user = username
-                # phone = number
-                # print()
-                # print()
-                # print()
-                # print(user)
-                # print()
-                # print()
-                # print()
-                LoginPage.destroy(self)
-                Dashboard.Dashboard(username, number)
-                
-                # SignupPage.top.deiconify()
-                # LoginPage.top.deiconify()
-                # LoginPage.destroy(self)
-                top.withdraw()
-                # root.deiconify()          #commented
-                # tkdemo.top.destroy()
-                # top.destroy()
+            if(len(number)!=10):
+                tk.messagebox.showerror("Invalid Number", "Please enter a valid number")
             else:
-                # tk.messagebox.showerror("Information", "The Username or Password you have entered are incorrect ")
-                get_signup(username,number)
+                validation = validate(username, number)
+                if validation:
+                    
+                    LoginPage.destroy(self)
+                    Dashboard.Dashboard(username, number)
+                    
+                    # SignupPage.top.deiconify()
+                    # LoginPage.top.deiconify()
+                    # LoginPage.destroy(self)
+                    top.withdraw()
+                    # root.deiconify()          #commented
+                    # tkdemo.top.destroy()
+                    # top.destroy()
+                else:
+                    # tk.messagebox.showerror("Information", "The Username or Password you have entered are incorrect ")
+                    get_signup(username,number)
 
         def validate(username, number):
             # Checks the text file for a username/password combination.

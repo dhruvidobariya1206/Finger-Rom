@@ -15,7 +15,7 @@ class SignupPage(tk.Tk):
 
         tk.Tk.__init__(self, *args, **kwargs)
 
-        main_frame = tk.Frame(self, bg="#9EAABF", height=150, width=250)
+        main_frame = tk.Frame(self, bg="#1c4966", height=150, width=250)
         # pack_propagate prevents the window resizing to match the widgets
         main_frame.pack_propagate(0)
         main_frame.pack(fill="both", expand="true")
@@ -32,17 +32,17 @@ class SignupPage(tk.Tk):
             print("selected"+str(gen.get()))
         gen = IntVar()  
         print("init"+str(gen.get()))
-        lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12))  
+        lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12), background="#9EAABF")  
         lb5.place(x=20, y=60)  
         
-        radio_m=Radiobutton(main_frame,text="Male",variable = gen, value=1,command=selection)
+        radio_m=Radiobutton(main_frame,text="Male",variable = gen, value=1,command=selection, background="#9EAABF")
         radio_m.place(x=240, y=60)
-        radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection)
+        radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection, background="#9EAABF")
         radio_f.place(x=320,y=60)
         
         
         
-        lb2= Label(main_frame, text="Age", width=15,font=("arial",12))  
+        lb2= Label(main_frame, text="Age", width=15,font=("arial",12), background="#9EAABF")  
         lb2.place(x=20,y=100)
         en2= Entry(main_frame)  
         en2.place(x=240, y=100)
@@ -58,7 +58,7 @@ class SignupPage(tk.Tk):
         # en7 =Entry(main_frame, show='*')  
         # en7.place(x=200, y=320)  
         
-        Button(main_frame, text="Register", width=15, command=lambda: signup()).place(x=150,y=200) 
+        Button(main_frame, text="Register", width=15, command=lambda: signup(), background="#9EAABF").place(x=150,y=200) 
 
         # print(str(gen.get()))
 
