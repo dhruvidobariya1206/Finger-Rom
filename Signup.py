@@ -7,6 +7,8 @@ import db_conn
 import tkinter_demo as tkdemo
 import Dashboard
 
+gender = ""
+
 class SignupPage(tk.Tk):
 
     def __init__(self, username, phone, *args, **kwargs):
@@ -49,7 +51,11 @@ class SignupPage(tk.Tk):
         # lb4.place(x=20, y=160)  
         # en4= Entry(main_frame)  
         # en4.place(x=200, y=160)
-        gen = IntVar()  
+        
+        def selection():
+            print("selected"+str(radio.get()))
+        
+        radio = IntVar()  
         
         lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12))  
         lb5.place(x=20, y=60)  
@@ -57,8 +63,12 @@ class SignupPage(tk.Tk):
         # Radiobutton(main_frame, text="Male", padx=5,variable=gen, value=1).place(x=200, y=200)  
         # Radiobutton(main_frame, text="Female", padx =10,variable=gen, value=2).place(x=280,y=200)  
         # Radiobutton(main_frame, text="others", padx=15, variable=vars, value=3).place(x=310,y=240)
-        gumb1=Radiobutton(main_frame,text="Male",value = 1,variable = gen).place(x=240, y=60)
-        gumb2=Radiobutton(main_frame,text="Female",value = 2,variable = gen).place(x=320,y=60)
+        gumb1=Radiobutton(main_frame,text="Male", variable = radio, value=1,command=selection)
+        gumb1.place(x=240, y=60)
+        gumb2=Radiobutton(main_frame,text="Female", variable = radio, value=2, command=selection)
+        gumb2.place(x=320,y=60)
+        
+        
         
         lb2= Label(main_frame, text="Age", width=15,font=("arial",12))  
         lb2.place(x=20,y=100)
@@ -78,7 +88,7 @@ class SignupPage(tk.Tk):
         
         Button(main_frame, text="Register", width=15, command=lambda: signup()).place(x=150,y=200) 
 
-
+        print(str(gen.get()))
 
 
 
@@ -91,8 +101,8 @@ class SignupPage(tk.Tk):
             age = str(en2.get())
             
             
-            gender = gen.get()
-            print(gen.get())
+            gender = radio.get()
+            print(radio.get())
             print("gender"+str(gender))
             pgen='F'
             if(gender==2):

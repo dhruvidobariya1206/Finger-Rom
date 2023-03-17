@@ -1,28 +1,43 @@
-import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 
-root = tk.Tk()
+import db_conn
+# global gender
+# Create an instance of tkinter frame or window
+win = Tk()
 
-# Create a list of options for the dropdown input
-options = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+# Set the size of the window
+win.geometry("700x350")
 
-# Create a StringVar object to store the selected option
-selected_option = tk.StringVar()
+# Define a function to get the output for selected option
+def selection():
+    selected = "You selected the option " + str(radio.get())
+    label.config(text=selected)
+    global gender
+    if(radio.get()==1):
+        gender='M'
+    elif(radio.get()==2):
+        gender='F'
+    print("gender " + gender)
+    # return radio.get()
+    # query = f"insert into test values ({radio.get()})"
+    # print(query)
+    # db_conn.mycursor.execute(query)
 
-# Set the default value of the StringVar object to the first option
-selected_option.set(options[0])
+radio = IntVar()
+Label(text="Your Favourite programming language:", font=('Aerial 11')).pack()
 
-# Define a function to update the selected option in the StringVar object
-def update_selected_option(*args):
-    selected_option.set(dropdown.get())
+# Define radiobutton for each options
+r1 = Radiobutton(win, text="C++", variable=radio, value=1, command=selection)
+r1.pack(anchor=N)
+r2 = Radiobutton(win, text="Python", variable=radio, value=2, command=selection)
+r2.pack(anchor=N)
+r3 = Radiobutton(win, text="Java", variable=radio, value=3, command=selection)
+r3.pack(anchor=N)
 
-# Create the dropdown input widget
-dropdown = tk.OptionMenu(root, selected_option, *options)
-
-# Add the dropdown input widget to the GUI
-dropdown.pack()
-
-# Call the update_selected_option function when an option is selected
-selected_option.trace("w", update_selected_option)
-
-# Run the main event loop
-root.mainloop()
+# Define a label widget
+selection()
+label = Label(win)
+label.pack()
+print("main " + gender)
+win.mainloop()
