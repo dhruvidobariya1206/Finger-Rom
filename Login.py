@@ -36,12 +36,12 @@ class LoginPage(tk.Tk):
         # frame_login = tk.Frame(main_frame, bg="dark blue", relief="groove", bd=2)  # this is the frame that holds all the login details and buttons
         # frame_login.place(rely=0.30, relx=0.17, height=200, width=420)
 
-        lb1= Label(main_frame, text="Enter Name", width=20, font=("arial",12))  
+        lb1= Label(main_frame, text="Enter Name", width=20, font=("arial",12), background="#1c4966")  
         lb1.place(x=20, y=60)  
         en1= Entry(main_frame)  
         en1.place(x=240, y=60)
         
-        lb2= Label(main_frame, text="Enter Phone Number", width=20, font=("arial",12))  
+        lb2= Label(main_frame, text="Enter Phone Number", width=20, font=("arial",12), background="#1c4966")  
         lb2.place(x=20, y=100)  
         en2= Entry(main_frame)  
         en2.place(x=240, y=100) 
@@ -51,7 +51,7 @@ class LoginPage(tk.Tk):
         # en3= Entry(main_frame, show="*")  
         # en3.place(x=240, y=140)  
 
-        Button(main_frame, text="Login", width=15, command=lambda: getlogin()).place(x=150,y=200) 
+        Button(main_frame, text="Login", width=15, command=lambda: getlogin(), background="#1c4966").place(x=150,y=200) 
         # Button(main_frame, text="Register", width=15, command=lambda: get_signup()).place(x=300,y=200) 
         
         def get_signup(username, phone):
