@@ -33,12 +33,12 @@ class SignupPage(tk.Tk):
             print("selected"+str(gen.get()))
         gen = IntVar()  
         print("init"+str(gen.get()))
-        lb5= Label(main_frame, text="Select Gender", width=15, font=("arial",12), background="#9EAABF")  
+        lb5= Label(main_frame, text="Select Gender", width=15, font=("Verdana",12), background="#9EAABF")  
         lb5.place(x=20, y=60)  
         
-        radio_m=Radiobutton(main_frame,text="Male",variable = gen, value=1,command=selection, background="#9EAABF")
+        radio_m=Radiobutton(main_frame,text="Male",variable = gen, value=1,command=selection, foreground='#FFFFFF', background="#1c4966", font=("Verdana",12))
         radio_m.place(x=240, y=60)
-        radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection, background="#9EAABF")
+        radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection, foreground='#FFFFFF', background="#1c4966", font=("Verdana",12))
         radio_f.place(x=320,y=60)
         
         def only_numbers(char):
