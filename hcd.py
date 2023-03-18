@@ -1,6 +1,6 @@
 print("in hcd")
 
-
+import left_right as lr
 import mediapipe as mp
 import cv2
 import numpy as np
@@ -93,16 +93,16 @@ def draw_finger_angles(image, results, joint_list):
                 pass
             if k == 0:
                 # print("yes")
-                index_angles["INDEX_FINGER_TIP"] = angle
+                index_angles["INDEX_FINGER_TIP"] = angle 
                 index_angles["INDEX_FINGER_PIP"] = angle2
                 index_angles["INDEX_FINGER_MCP"] = angle3
                 
             elif k== 1:
-                middle_angles["MIDDLE_FINGER_TIP"] = angle
+                middle_angles["MIDDLE_FINGER_TIP"] = angle 
                 middle_angles["MIDDLE_FINGER_PIP"] = angle2
                 middle_angles["MIDDLE_FINGER_MCP"] = angle3
             elif k== 2:
-                ring_angles["RING_FINGER_TIP"] = angle
+                ring_angles["RING_FINGER_TIP"] = angle 
                 ring_angles["RING_FINGER_PIP"] = angle2
                 ring_angles["RING_FINGER_MCP"] = angle3
             elif k== 3:
@@ -153,13 +153,27 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
                                         mp_drawing.DrawingSpec(color=(250, 44, 250), thickness=2, circle_radius=2),
                                          )
                 
-            draw_finger_angles(image, results, joint_list)
-           
+                draw_finger_angles(image, results, joint_list)
+                if lr.get_label(num, hand, results):
+                        text, coord = lr.get_label(num, hand, results)
+                        cv2.putText(image, text, coord, cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
             
         cv2.imshow('Hand Tracking', image)
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
-            # print(index_angles)
+            # which_hand = lr.get_label(num, hand, results)
+            # # print(index_angles)
+            # print()
+            # print()
+            # print()
+            # print()
+            
+            # print(f'which hand {which_hand}')
+            # print()
+            # print()
+            # print()
+            # print()
+            
             index_angles["INDEX_FINGER_PIP"]=round(index_angles["INDEX_FINGER_PIP"],1)
             middle_angles["MIDDLE_FINGER_PIP"]=round(middle_angles["MIDDLE_FINGER_PIP"],1)
             ring_angles["RING_FINGER_PIP"]=round(ring_angles["RING_FINGER_PIP"],1)

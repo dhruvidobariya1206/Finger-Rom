@@ -32,7 +32,7 @@ class SignupPage(tk.Tk):
         def selection():
             print("selected"+str(gen.get()))
         gen = IntVar()  
-        print("init"+str(gen.get()))
+        # print("init"+str(gen.get()))
         lb5= Label(main_frame, text="Select Gender", width=15, font=("Verdana",12), background="#9EAABF")  
         lb5.place(x=20, y=60)  
         
@@ -71,9 +71,9 @@ class SignupPage(tk.Tk):
             
             
             gender = gen.get()
-            print(gen.get())
-            print("gender"+str(gender))
-            pgen='F'
+            # print(gen.get())
+            # print("gender"+str(gender))
+            # pgen='F'
             if(gender==2):
                 pgen = 'F'
             elif(gender==1):
