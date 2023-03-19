@@ -39,10 +39,15 @@ class LoginPage(tk.Tk):
             return char.isdigit()
         validation = main_frame.register(only_numbers)
 
-        lb1= Label(main_frame, text="Enter Name", width=20, font=("Verdana",12), background="#9EAABF")  
-        lb1.place(x=20, y=60)  
-        en1= Entry(main_frame)  
-        en1.place(x=240, y=60)
+        lb1= Label(main_frame, text="Enter Patient Id", width=20, font=("Verdana",12), background="#9EAABF")  
+        lb1.place(x=20, y=60) 
+        options=['C','J']
+        clicked = StringVar()
+        clicked.set(options[0])
+        drop = OptionMenu(main_frame, clicked, *options)
+        drop.place(x=240, y=60)
+        en1= Entry(main_frame, validate="key", validatecommand=(validation, '%S'))  
+        en1.place(x=280, y=60)
         
         lb2= Label(main_frame, text="Enter Phone Number", width=20, font=("Verdana",12), background="#9EAABF")  
         lb2.place(x=20, y=100)  
@@ -59,22 +64,23 @@ class LoginPage(tk.Tk):
         
         
         
-        def get_signup(username, phone):
-            SignupPage(username,phone)
+        def get_signup(Patient_Id, phone):
+            SignupPage(Patient_Id,phone)
             # SignupPage()
 
         def getlogin():
-            username = en1.get()
+            Patient_id = clicked.get()+str(en1.get())
             # password = en3.get()
+            print(Patient_id)
             number = en2.get()
             if(len(number)!=10):
                 tk.messagebox.showerror("Invalid Number", "Please enter a valid number")
             else:
-                validation = validate(username, number)
+                validation = validate(Patient_Id, number)
                 if validation:
                     
                     LoginPage.destroy(self)
-                    Dashboard.Dashboard(username, number)
+                    Dashboard.Dashboard(Patient_Id, number)
                     
                     # SignupPage.top.deiconify()
                     # LoginPage.top.deiconify()
@@ -84,14 +90,14 @@ class LoginPage(tk.Tk):
                     # tkdemo.top.destroy()
                     # top.destroy()
                 else:
-                    # tk.messagebox.showerror("Information", "The Username or Password you have entered are incorrect ")
+                    # tk.messagebox.showerror("Information", "The Patient_Id or Password you have entered are incorrect ")
                     LoginPage.destroy(self)
-                    get_signup(username,number)
+                    get_signup(Patient_Id,number)
 
-        def validate(username, number):
-            # Checks the text file for a username/password combination.
+        def validate(Patient_Id, number):
+            # Checks the text file for a Patient_Id/password combination.
             try:
-                query = "Select * from patients where PName='"+username+"' and PPhone='"+number+"'"
+                query = "Select * from patients where Patient_ID='"+Patient_Id+"' and PPhone='"+number+"'"
                 
                 # print(query)
                 db_conn.mycursor.execute(query)
