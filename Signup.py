@@ -12,7 +12,7 @@ gender = ""
 
 class SignupPage(tk.Tk):
 
-    def __init__(self, Patient_Id, phone, *args, **kwargs):
+    def __init__(self, Patient_Id, *args, **kwargs):
 
         tk.Tk.__init__(self, *args, **kwargs)
 
@@ -21,7 +21,7 @@ class SignupPage(tk.Tk):
         main_frame.pack_propagate(0)
         main_frame.pack(fill="both", expand="true")
 
-        self.geometry("450x300")
+        self.geometry("450x400")
         self.resizable(0, 0)
 
         self.title("Registration")
@@ -38,48 +38,52 @@ class SignupPage(tk.Tk):
             return not char.isdigit()
         validation_char = main_frame.register(only_character)
         
-        lb_fname= Label(main_frame, text="Enter First Name", width=15,font=("arial",12), background="#9EAABF")  
+        lb_fname= Label(main_frame, text="First Name", width=15,font=("arial",12), background="#9EAABF")  
         lb_fname.place(x=20,y=60)
         en_fname= Entry(main_frame, validate="key", validatecommand=(validation_char, '%S'))  
         en_fname.place(x=240, y=60)
         
-        lb_mname= Label(main_frame, text="Enter Middle Name", width=15,font=("arial",12), background="#9EAABF")  
+        lb_mname= Label(main_frame, text="Middle Name", width=15,font=("arial",12), background="#9EAABF")  
         lb_mname.place(x=20,y=100)
-        en2= Entry(main_frame, validate="key", validatecommand=(validation_char, '%S'))  
-        en2.place(x=240, y=100)
+        en_mname= Entry(main_frame, validate="key", validatecommand=(validation_char, '%S'))  
+        en_mname.place(x=240, y=100)
         
-        lb_lname= Label(main_frame, text="Enter Last Name", width=15,font=("arial",12), background="#9EAABF")  
+        lb_lname= Label(main_frame, text="Last Name", width=15,font=("arial",12), background="#9EAABF")  
         lb_lname.place(x=20,y=140)
-        en2= Entry(main_frame, validate="key", validatecommand=(validation_char, '%S'))  
-        en2.place(x=240, y=140)
+        en_lname= Entry(main_frame, validate="key", validatecommand=(validation_char, '%S'))  
+        en_lname.place(x=240, y=140)
         
+        lb_phone= Label(main_frame, text="Phone Number", width=20, font=("Verdana",12), background="#9EAABF")  
+        lb_phone.place(x=20, y=180)  
+        en_phone= Entry(main_frame, validate="key", validatecommand=(validation_num, '%S'))  
+        en_phone.place(x=240, y=180) 
         
         def selection():
             print("selected"+str(gen.get()))
         gen = IntVar()  
         # print("init"+str(gen.get()))
         lb5= Label(main_frame, text="Select Gender", width=15, font=("Verdana",12), background="#9EAABF")  
-        lb5.place(x=20, y=180)  
+        lb5.place(x=20, y=220)  
         
         radio_m=Radiobutton(main_frame,text="Male",variable = gen, value=1,command=selection, foreground='#FFFFFF', background="#1c4966", font=("Verdana",12))
-        radio_m.place(x=240, y=180)
+        radio_m.place(x=240, y=220)
         radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection, foreground='#FFFFFF', background="#1c4966", font=("Verdana",12))
-        radio_f.place(x=320,y=180)
+        radio_f.place(x=320,y=220)
         
         
         
         lb_age= Label(main_frame, text="Age", width=15,font=("arial",12), background="#9EAABF")  
-        lb_age.place(x=20,y=220)
+        lb_age.place(x=20,y=260)
         en_age= Entry(main_frame, validate="key", validatecommand=(validation_num, '%S'))  
-        en_age.place(x=240, y=220)
+        en_age.place(x=240, y=260)
           
-        lb_occupation= Label(main_frame, text="Age", width=15,font=("arial",12), background="#9EAABF")  
-        lb_occupation.place(x=20,y=240)
+        lb_occupation= Label(main_frame, text="Occupation", width=15,font=("arial",12), background="#9EAABF")  
+        lb_occupation.place(x=20,y=300)
         en_occupation= Entry(main_frame, validate="key", validatecommand=(validation_char, '%S'))  
-        en_occupation.place(x=240, y=240)
+        en_occupation.place(x=240, y=300)
         
-        Button(main_frame, text="Back", width=15, command=lambda: back(), background="#9EAABF").place(x=100,y=280) 
-        Button(main_frame, text="Register", width=15, command=lambda: signup(), background="#9EAABF").place(x=250,y=280) 
+        Button(main_frame, text="Back", width=15, command=lambda: back(), background="#9EAABF").place(x=100,y=340) 
+        Button(main_frame, text="Register", width=15, command=lambda: signup(), background="#9EAABF").place(x=250,y=340) 
 
         # print(str(gen.get()))
 
@@ -94,9 +98,12 @@ class SignupPage(tk.Tk):
             # pw = en6.get()
             # rpw = en7.get()
             # phone = en4.get()
-            age = str(en2.get())
-            
-            
+            age = str(en_age.get())
+            fname = en_fname.get()
+            mname = en_mname.get()
+            lname = en_lname.get()
+            occupation = en_occupation.get()
+            phone = en_phone.get()
             gender = gen.get()
             # print(gen.get())
             # print("gender"+str(gender))
@@ -122,23 +129,23 @@ class SignupPage(tk.Tk):
                     # credentials.write(f"Patient_Id,{user},Password,{pw},\n")
                     # credentials.close()
                     
-                query = "insert into patients(PName, PPhone, Gender, Age) values('"+Patient_Id+"','"+phone+"','"+pgen+"','"+age+"')"
+                query = f"insert into patients(Patient_ID,First_Name,Middle_Name, Last_Name, PPhone, Gender, Age, Occupation) values('{Patient_Id}','{fname}','{mname}','{lname}','{phone}','{pgen}','{age}','{occupation}')"
                 print(query)
                 db_conn.mycursor.execute(query)
                 
-                q1=f"SELECT PId from patients WHERE PPhone='{phone}';"
-                db_conn.mycursor.execute(q1)
-                row1 = db_conn.mycursor.fetchone()
+                # q1=f"SELECT PId from patients WHERE PPhone='{phone}';"
+                # db_conn.mycursor.execute(q1)
+                # row1 = db_conn.mycursor.fetchone()
                 
-                q2 = f"insert into angle_pip(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
-                db_conn.mycursor.execute(q2)
-                q3 = f"insert into angle_tip(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
-                db_conn.mycursor.execute(q3)
-                q4 = f"insert into angle_mcp(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
-                db_conn.mycursor.execute(q4)
+                # q2 = f"insert into angle_pip(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
+                # db_conn.mycursor.execute(q2)
+                # q3 = f"insert into angle_tip(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
+                # db_conn.mycursor.execute(q3)
+                # q4 = f"insert into angle_mcp(P_id,ind,mid,ring,little,thumb) values('{row1[0]}','0','0','0','0','0')"
+                # db_conn.mycursor.execute(q4)
                 tk.messagebox.showinfo("Information", "Your account details have been stored.")
                 SignupPage.destroy(self)
-                Dashboard.Dashboard(Patient_Id, phone)
+                Dashboard.Dashboard(Patient_Id)
 
                 
                 
@@ -147,7 +154,7 @@ class SignupPage(tk.Tk):
         def validate_user():
             # Checks the text file for a Patient_Id/password combination.
             try:
-                query = f"Select * from patients where Patient_Id='{Patient_Id}' PPhone='{phone}'"
+                query = f"Select * from patients where Patient_Id='{Patient_Id}'"
                 # print(query)
                 db_conn.mycursor.execute(query)
                 row = db_conn.mycursor.fetchall()

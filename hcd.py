@@ -175,32 +175,32 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
             # print()
             # print()
             
-            # index_angles["INDEX_FINGER_PIP"]=round(index_angles["INDEX_FINGER_PIP"],1)
-            # middle_angles["MIDDLE_FINGER_PIP"]=round(middle_angles["MIDDLE_FINGER_PIP"],1)
-            # ring_angles["RING_FINGER_PIP"]=round(ring_angles["RING_FINGER_PIP"],1)
-            # pinky_angles["PINKY_PIP"]=round(pinky_angles["PINKY_PIP"],1)
-            # thumb_angles["THUMB_IP"]=round(thumb_angles["THUMB_IP"],1)
-            # query_pip = f"insert into angle_pip(P_id,ind,mid,ring,little,thumb) values('{user}','{str(index_angles['INDEX_FINGER_PIP'])}','{str(middle_angles['MIDDLE_FINGER_PIP'])}','{str(ring_angles['RING_FINGER_PIP'])}','{str(pinky_angles['PINKY_PIP'])}','{str(thumb_angles['THUMB_IP'])}')"
-            # # print(query_pip)
-            # db_conn.mycursor.execute(query_pip) 
+            index_angles["INDEX_FINGER_PIP"]=round(index_angles["INDEX_FINGER_PIP"],1)
+            middle_angles["MIDDLE_FINGER_PIP"]=round(middle_angles["MIDDLE_FINGER_PIP"],1)
+            ring_angles["RING_FINGER_PIP"]=round(ring_angles["RING_FINGER_PIP"],1)
+            pinky_angles["PINKY_PIP"]=round(pinky_angles["PINKY_PIP"],1)
+            thumb_angles["THUMB_IP"]=round(thumb_angles["THUMB_IP"],1)
+            query_pip = f"insert into angle_pip(P_id,Hand_Side,ind,mid,ring,little,thumb) values('{user}','{hand}','{str(index_angles['INDEX_FINGER_PIP'])}','{str(middle_angles['MIDDLE_FINGER_PIP'])}','{str(ring_angles['RING_FINGER_PIP'])}','{str(pinky_angles['PINKY_PIP'])}','{str(thumb_angles['THUMB_IP'])}')"
+            # print(query_pip)
+            db_conn.mycursor.execute(query_pip) 
 
-            # index_angles["INDEX_FINGER_TIP"]=round(index_angles["INDEX_FINGER_TIP"],1)
-            # middle_angles["MIDDLE_FINGER_TIP"]=round(middle_angles["MIDDLE_FINGER_TIP"],1)
-            # ring_angles["RING_FINGER_TIP"]=round(ring_angles["RING_FINGER_TIP"],1)
-            # pinky_angles["PINKY_TIP"]=round(pinky_angles["PINKY_TIP"],1)
-            # thumb_angles["THUMB_IP"]=round(thumb_angles["THUMB_IP"],1)
-            # query_Tip = f"insert into angle_tip(P_id,ind,mid,ring,little,thumb) values('{user}','{str(index_angles['INDEX_FINGER_TIP'])}','{str(middle_angles['MIDDLE_FINGER_TIP'])}','{str(ring_angles['RING_FINGER_TIP'])}','{str(pinky_angles['PINKY_TIP'])}','{str(thumb_angles['THUMB_IP'])}')"
-            # # print(query_Tip)
-            # db_conn.mycursor.execute(query_Tip)
+            index_angles["INDEX_FINGER_TIP"]=round(index_angles["INDEX_FINGER_TIP"],1)
+            middle_angles["MIDDLE_FINGER_TIP"]=round(middle_angles["MIDDLE_FINGER_TIP"],1)
+            ring_angles["RING_FINGER_TIP"]=round(ring_angles["RING_FINGER_TIP"],1)
+            pinky_angles["PINKY_TIP"]=round(pinky_angles["PINKY_TIP"],1)
+            thumb_angles["THUMB_IP"]=round(thumb_angles["THUMB_IP"],1)
+            query_Tip = f"insert into angle_tip(P_id,Hand_Side,ind,mid,ring,little,thumb) values('{user}','{hand}','{str(index_angles['INDEX_FINGER_TIP'])}','{str(middle_angles['MIDDLE_FINGER_TIP'])}','{str(ring_angles['RING_FINGER_TIP'])}','{str(pinky_angles['PINKY_TIP'])}','{str(thumb_angles['THUMB_IP'])}')"
+            # print(query_Tip)
+            db_conn.mycursor.execute(query_Tip)
             
-            # index_angles["INDEX_FINGER_MCP"]=round(index_angles["INDEX_FINGER_MCP"],1)
-            # middle_angles["MIDDLE_FINGER_MCP"]=round(middle_angles["MIDDLE_FINGER_MCP"],1)
-            # ring_angles["RING_FINGER_MCP"]=round(ring_angles["RING_FINGER_MCP"],1)
-            # pinky_angles["PINKY_MCP"]=round(pinky_angles["PINKY_MCP"],1)
-            # thumb_angles["THUMB_TIP"]=round(thumb_angles["THUMB_TIP"],1)
-            # query_MCP = f"insert into angle_mcp(P_id,ind,mid,ring,little,thumb) values('{user}','{str(index_angles['INDEX_FINGER_MCP'])}','{str(middle_angles['MIDDLE_FINGER_MCP'])}','{str(ring_angles['RING_FINGER_MCP'])}','{str(pinky_angles['PINKY_MCP'])}','{str(thumb_angles['THUMB_TIP'])}')"
-            # # print(query_MCP)
-            # db_conn.mycursor.execute(query_MCP)
+            index_angles["INDEX_FINGER_MCP"]=round(index_angles["INDEX_FINGER_MCP"],1)
+            middle_angles["MIDDLE_FINGER_MCP"]=round(middle_angles["MIDDLE_FINGER_MCP"],1)
+            ring_angles["RING_FINGER_MCP"]=round(ring_angles["RING_FINGER_MCP"],1)
+            pinky_angles["PINKY_MCP"]=round(pinky_angles["PINKY_MCP"],1)
+            thumb_angles["THUMB_TIP"]=round(thumb_angles["THUMB_TIP"],1)
+            query_MCP = f"insert into angle_mcp(P_id,Hand_Side,ind,mid,ring,little,thumb) values('{user}','{hand}','{str(index_angles['INDEX_FINGER_MCP'])}','{str(middle_angles['MIDDLE_FINGER_MCP'])}','{str(ring_angles['RING_FINGER_MCP'])}','{str(pinky_angles['PINKY_MCP'])}','{str(thumb_angles['THUMB_TIP'])}')"
+            # print(query_MCP)
+            db_conn.mycursor.execute(query_MCP)
             
             break
 

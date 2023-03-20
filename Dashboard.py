@@ -24,15 +24,15 @@ import Login
 # print(user)
 
 class Dashboard(tk.Tk):
-    def __init__(self, uname, phone, *args, **kwargs):
+    def __init__(self, Patient_Id, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         
         
-        query = "Select PId from patients where PPhone ='"+phone+"' and PName='"+uname+"'"
+        query = f"Select * from patients where Patient_ID='{Patient_Id}'"
         # print(query)
         db_conn.mycursor.execute(query)
-        row = db_conn.mycursor.fetchone()
-        user_id = row[0]
+        patient_details = db_conn.mycursor.fetchone()
+        user_id = patient_details[0]
         
         
         
@@ -50,12 +50,12 @@ class Dashboard(tk.Tk):
                        "foreground": "#EEFFFF"}
         
         
-        lb1= Label(main_frame, text=uname, width=70, height=1, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")  
+        lb1= Label(main_frame, text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]}", width=70, height=1, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")  
         lb1.place(x=0, y=0)
         
          
         
-        # lb2 = Label(main_frame, text=uname, width=15, height=2, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966")
+        # lb2 = Label(main_frame, text=Patient_Id, width=15, height=2, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966")
         # lb2.place(x=0, y=0)
         
         logout = Button(main_frame, text="Logout", width=15, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: logout())
@@ -68,6 +68,8 @@ class Dashboard(tk.Tk):
         Button(main_frame, text="List Angles", width=18, command=lambda: list_angles()).place(x=50,y=120)
         
         Button(main_frame, text="Veiw Progress", width=18, command=lambda: view_progress()).place(x=50,y=170) 
+        
+        Button(main_frame, text="Veiw History", width=18, command=lambda: ()).place(x=50,y=220) 
         
         # search_entry=Entry(main_frame, text="Search", width=10, font=("Verdana",18))
         # search_entry.place(x=900, y=70)
@@ -100,6 +102,12 @@ class Dashboard(tk.Tk):
             
         
         def list_angles():
+            hand = tk.simpledialog.askstring("Input", "Enter your name:").lower()
+            
+            # lb_hand = Label(main_frame, text=hand, width=8, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")
+            # lb_hand.place(x=1000,y=100)
+            lb1.config(text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]} - {hand} hand")
+            
             # ang_label1 = Label(main_frame,text='Sr No.', width=10)
             # ang_label1.place(x=20, y=100)
             ang_label1 = Label(main_frame,text='Finger', width=10)
@@ -122,73 +130,112 @@ class Dashboard(tk.Tk):
             fin_label5 = Label(main_frame,text='Thumb', width=10)
             fin_label5.place(x=350, y=270)
             # print("Angles")
-            query1 = f"Select * from angle_pip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 1;"
-            print(query1)
+            query1 = f"Select * from angle_pip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 1;"
+            # print(query1)
             db_conn.mycursor.execute(query1)
             row1 = db_conn.mycursor.fetchone()
             
-            query2 = f"Select * from angle_tip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 1;"
-            print(query2)
+            # print(cnt1)
+            # print()
+            # print()
+            # print()
+            query2 = f"Select * from angle_tip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 1;"
+            # print(query2)
             db_conn.mycursor.execute(query2)
             row2 = db_conn.mycursor.fetchone()
             
-            query3 = f"Select * from angle_mcp where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 1;"
-            print(query3)
+            query3 = f"Select * from angle_mcp where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 1;"
+            # print(query3)
             db_conn.mycursor.execute(query3)
             row3 = db_conn.mycursor.fetchone()
             
-            for ang in range(5):
+            if(len(row1)==0 or len(row2)==0 or len(row3)==0):
+                for ang in range(5):
                 # num = Label(main_frame, text='111', widht=10)
                 # num.place(x=20,y=140+(40*ang))
-                if(ang==4):
-                    value1 = Label(main_frame,text=row1[2+ang], width=22)
+                    if(ang==4):
+                        value1 = Label(main_frame,text="0", width=22)
+                        value1.place(x=450, y=110+(40*ang))
+                        value3 = Label(main_frame,text="0", width=10)
+                        value3.place(x=650, y=110+(40*ang))
+                        break
+                    
+                    value1 = Label(main_frame,text="0", width=10)
                     value1.place(x=450, y=110+(40*ang))
-                    value3 = Label(main_frame,text=row3[2+ang], width=10)
+                
+                    value2 = Label(main_frame,text="0", width=10)
+                    value2.place(x=550, y=110+(40*ang))
+                
+                    value3 = Label(main_frame,text="0", width=10)
                     value3.place(x=650, y=110+(40*ang))
-                    break
-                    
-                value1 = Label(main_frame,text=row1[2+ang], width=10)
-                value1.place(x=450, y=110+(40*ang))
                 
-                value2 = Label(main_frame,text=row2[2+ang], width=10)
-                value2.place(x=550, y=110+(40*ang))
-                
-                value3 = Label(main_frame,text=row3[2+ang], width=10)
-                value3.place(x=650, y=110+(40*ang))
+            else:
+                for ang in range(5):
+                    # num = Label(main_frame, text='111', widht=10)
+                    # num.place(x=20,y=140+(40*ang))
+                    if(ang==4):
+                        value1 = Label(main_frame,text=row1[3+ang], width=22)
+                        value1.place(x=450, y=110+(40*ang))
+                        value3 = Label(main_frame,text=row3[3+ang], width=10)
+                        value3.place(x=650, y=110+(40*ang))
+                        break
+                        
+                    value1 = Label(main_frame,text=row1[3+ang], width=10)
+                    value1.place(x=450, y=110+(40*ang))
                     
+                    value2 = Label(main_frame,text=row2[3+ang], width=10)
+                    value2.place(x=550, y=110+(40*ang))
+                    
+                    value3 = Label(main_frame,text=row3[3+ang], width=10)
+                    value3.place(x=650, y=110+(40*ang))
+                        
         def view_progress():
-            print("View Progress")
+            # print("View Progress")
+            hand = tk.simpledialog.askstring("Input", "Enter your name:").lower()
+            # print(hand)
             fig = Figure(figsize = (5,5), dpi = 100)
             
-            plot1 = fig.add_subplot(111)
+            # plot1 = fig.add_subplot(111)
             
-            query1 = f"Select ind, mid, ring, little, thumb from angle_pip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
+            query1 = f"Select ind, mid, ring, little, thumb from angle_pip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 2;"
             # print(query1)
             db_conn.mycursor.execute(query1)
-            cnt = db_conn.mycursor.rowcount
             row1 = db_conn.mycursor.fetchall()
             
-            if(cnt!=2):
-                tk.messagebox.showinfo("Alert","Please record the angles")
-            
-            query2 = f"Select ind, mid, ring, little, thumb from angle_tip where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
+            query2 = f"Select ind, mid, ring, little, thumb from angle_tip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 2;"
             # print(query1)
             db_conn.mycursor.execute(query2)
             row2 = db_conn.mycursor.fetchall()
 
-            query2 = f"Select ind, mid, ring, little, thumb from angle_mcp where P_id='{user_id}' ORDER BY SrNo DESC LIMIT 2;"
+            query3 = f"Select ind, mid, ring, little, thumb from angle_mcp where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 2;"
             # print(query1)
-            db_conn.mycursor.execute(query2)
+            db_conn.mycursor.execute(query3)
             row3 = db_conn.mycursor.fetchall()
             
-            # if(row1.ro)
+            prev_pip=[]
+            curr_pip=[]
+            prev_tip=[]
+            curr_tip=[]
+            prev_mcp=[]
+            curr_mcp=[]
             
-            prev_pip=np.array(row1[1])
-            curr_pip=np.array(row1[0])
-            prev_tip=np.array(row2[1])
-            curr_tip=np.array(row2[0])
-            prev_mcp=np.array(row3[1])
-            curr_mcp=np.array(row3[0])
+            if(len(row1)<1 or len(row2)<1 or len(row3)<1):
+                tk.messagebox.showinfo("Alert","Please record the angles")
+            
+            elif(len(row1)==1 or len(row2)==1 or len(row3)==1):
+                prev_pip=np.zeros(5)
+                curr_pip=np.array(row1[0])
+                prev_tip=np.zeros(5)
+                curr_tip=np.array(row2[0])
+                prev_mcp=np.zeros(5)
+                curr_mcp=np.array(row3[0])
+            else:
+                prev_pip=np.array(row1[1])
+                curr_pip=np.array(row1[0])
+                prev_tip=np.array(row2[1])
+                curr_tip=np.array(row2[0])
+                prev_mcp=np.array(row3[1])
+                curr_mcp=np.array(row3[0])
             
             tip=[]
             pip=[]
@@ -239,7 +286,7 @@ class Dashboard(tk.Tk):
             line1.get_tk_widget().place(x=20,y=350)
             for i in range(5):
                 tip[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_tip, marker="o")
-            graph_tip.set_title("TIP")
+            graph_tip.set_title("DIP")
             
             figure2 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
             graph_pip = figure2.add_subplot(1,1,1)
