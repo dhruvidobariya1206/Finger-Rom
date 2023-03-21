@@ -16,6 +16,7 @@ import db_conn
 import tkinter_demo as tkdemo
 # import Signup
 import Login
+import History
 # from Login import *
 
 
@@ -69,7 +70,7 @@ class Dashboard(tk.Tk):
         
         Button(main_frame, text="Veiw Progress", width=18, command=lambda: view_progress()).place(x=50,y=170) 
         
-        Button(main_frame, text="Veiw History", width=18, command=lambda: ()).place(x=50,y=220) 
+        Button(main_frame, text="Veiw History", width=18, command=lambda: history()).place(x=50,y=220) 
         
         # search_entry=Entry(main_frame, text="Search", width=10, font=("Verdana",18))
         # search_entry.place(x=900, y=70)
@@ -79,7 +80,12 @@ class Dashboard(tk.Tk):
         # search_btn.place(x=100,y=70)
         # Button(main_frame, text="Search", width=10, command=lambda: search()).place(x=1060,y=70) 
         
-        
+        def history():
+            Dashboard.destroy(self)
+            top = History.History(user_id)
+            top.title("History")
+            top.mainloop()
+            
     
         def run_script():
             # subprocess.call(['python', f'hcd.py',f'{user_id}'])
@@ -102,7 +108,7 @@ class Dashboard(tk.Tk):
             
         
         def list_angles():
-            hand = tk.simpledialog.askstring("Input", "Enter your name:").lower()
+            hand = tk.simpledialog.askstring("Input", "Enter hand:").lower()
             
             # lb_hand = Label(main_frame, text=hand, width=8, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")
             # lb_hand.place(x=1000,y=100)
@@ -174,40 +180,40 @@ class Dashboard(tk.Tk):
                     # num = Label(main_frame, text='111', widht=10)
                     # num.place(x=20,y=140+(40*ang))
                     if(ang==4):
-                        value1 = Label(main_frame,text=row1[3+ang], width=22)
+                        value1 = Label(main_frame,text=row1[4+ang], width=22)
                         value1.place(x=450, y=110+(40*ang))
-                        value3 = Label(main_frame,text=row3[3+ang], width=10)
+                        value3 = Label(main_frame,text=row3[4+ang], width=10)
                         value3.place(x=650, y=110+(40*ang))
                         break
                         
-                    value1 = Label(main_frame,text=row1[3+ang], width=10)
+                    value1 = Label(main_frame,text=row1[4+ang], width=10)
                     value1.place(x=450, y=110+(40*ang))
                     
-                    value2 = Label(main_frame,text=row2[3+ang], width=10)
+                    value2 = Label(main_frame,text=row2[4+ang], width=10)
                     value2.place(x=550, y=110+(40*ang))
                     
-                    value3 = Label(main_frame,text=row3[3+ang], width=10)
+                    value3 = Label(main_frame,text=row3[4+ang], width=10)
                     value3.place(x=650, y=110+(40*ang))
                         
         def view_progress():
             # print("View Progress")
-            hand = tk.simpledialog.askstring("Input", "Enter your name:").lower()
+            hand = tk.simpledialog.askstring("Input", "Enter hand:").lower()
             # print(hand)
             fig = Figure(figsize = (5,5), dpi = 100)
-            
+            lb1.config(text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]} - {hand} hand")
             # plot1 = fig.add_subplot(111)
             
-            query1 = f"Select ind, mid, ring, little, thumb from angle_pip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 2;"
+            query1 = f"Select ind, mid, ring, little, thumb from angle_pip where P_id='{user_id}' and Hand_Side='{hand}';"
             # print(query1)
             db_conn.mycursor.execute(query1)
             row1 = db_conn.mycursor.fetchall()
             
-            query2 = f"Select ind, mid, ring, little, thumb from angle_tip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 2;"
+            query2 = f"Select ind, mid, ring, little, thumb from angle_tip where P_id='{user_id}' and Hand_Side='{hand}';"
             # print(query1)
             db_conn.mycursor.execute(query2)
             row2 = db_conn.mycursor.fetchall()
 
-            query3 = f"Select ind, mid, ring, little, thumb from angle_mcp where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 2;"
+            query3 = f"Select ind, mid, ring, little, thumb from angle_mcp where P_id='{user_id}' and Hand_Side='{hand}';"
             # print(query1)
             db_conn.mycursor.execute(query3)
             row3 = db_conn.mycursor.fetchall()

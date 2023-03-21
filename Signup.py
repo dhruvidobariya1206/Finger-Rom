@@ -105,7 +105,7 @@ class SignupPage(tk.Tk):
             occupation = en_occupation.get()
             phone = en_phone.get()
             gender = gen.get()
-            # print(gen.get())
+            # print(type(age))
             # print("gender"+str(gender))
             # pgen='F'
             if(gender==2):
@@ -121,6 +121,8 @@ class SignupPage(tk.Tk):
                 tk.messagebox.showerror("Information", "Your phone number needs to be 10 digits long.")
             # elif(len(pw)<3):
             #     tk.messagebox.showerror("Information", "Your password needs to be longer than 3 values.")
+            elif(len(age)>2):
+                tk.messagebox.showerror("Information", "Please enter valid age.")
             elif validation:
                 tk.messagebox.showerror("Information", "That Patient_Id already exists")
             else:
