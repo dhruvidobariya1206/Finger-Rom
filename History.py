@@ -99,7 +99,7 @@ class History(tk.Tk):
                     cnt+=1
         
         def PIP(hand):
-            print("PIP"+hand)
+            # print("PIP"+hand)
             query1 = f"Select * from angle_pip where P_id = '{user_id}' and Hand_Side = '{hand}'"
             # print(query1)
             db_conn.mycursor.execute(query1)
@@ -145,7 +145,7 @@ class History(tk.Tk):
         
         
         def MCP(hand): 
-            print("MCP"+hand) 
+            # print("MCP"+hand) 
             query1 = f"Select * from angle_mcp where P_id = '{user_id}' and Hand_Side = '{hand}'"
             # print(query1)
             db_conn.mycursor.execute(query1)

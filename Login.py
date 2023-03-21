@@ -70,7 +70,7 @@ class LoginPage(tk.Tk):
         def getlogin():
             Patient_id = clicked.get()+str(en1.get())
             # password = en3.get()
-            print(Patient_id)
+            # print(Patient_id)
 
             validation = validate(Patient_id)
             if validation:

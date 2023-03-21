@@ -218,69 +218,26 @@ class Dashboard(tk.Tk):
             db_conn.mycursor.execute(query3)
             row3 = db_conn.mycursor.fetchall()
             
-            prev_pip=[]
-            curr_pip=[]
-            prev_tip=[]
-            curr_tip=[]
-            prev_mcp=[]
-            curr_mcp=[]
+            if(len(row1)==0 or len(row2)==0 or len(row3)==0):
+                tk.messagebox.showinfo("Alert",f"Please record the angles for {hand} hand")
             
-            if(len(row1)<1 or len(row2)<1 or len(row3)<1):
-                tk.messagebox.showinfo("Alert","Please record the angles")
-            
-            elif(len(row1)==1 or len(row2)==1 or len(row3)==1):
-                prev_pip=np.zeros(5)
-                curr_pip=np.array(row1[0])
-                prev_tip=np.zeros(5)
-                curr_tip=np.array(row2[0])
-                prev_mcp=np.zeros(5)
-                curr_mcp=np.array(row3[0])
             else:
-                prev_pip=np.array(row1[1])
-                curr_pip=np.array(row1[0])
-                prev_tip=np.array(row2[1])
-                curr_tip=np.array(row2[0])
-                prev_mcp=np.array(row3[1])
-                curr_mcp=np.array(row3[0])
-            
-            tip=[]
-            pip=[]
-            mcp=[]
+                dip=[]
+                pip=[]
+                mcp=[]
                 
-            col11=[]
-            col21=[]
-            col31=[]
-            # col.append
-            for j in range(5):
-                col11.append(prev_tip[j])
-                col21.append(prev_pip[j])
-                col31.append(prev_mcp[j])
-            tip.append(col11)
-            pip.append(col21)
-            mcp.append(col31)
+                for data in row1:
+                    pip.append(data)
+                for data in row2:
+                    dip.append(data)
+                for data in row3:
+                    mcp.append(data)
             
-            col12=[]
-            col22=[]
-            col32=[]
-            # col.append
-            for j in range(5):
-                col12.append(curr_tip[j])
-                col22.append(curr_pip[j])
-                col32.append(curr_mcp[j])
-            tip.append(col12)
-            pip.append(col22)
-            mcp.append(col32)
-            
-            tip=pd.DataFrame(tip)
+            dip = pd.DataFrame(dip)
             pip = pd.DataFrame(pip)
             mcp = pd.DataFrame(mcp)
             
-            # print(pip)
-            # print(tip)
-            # print(mcp)
-            
-            lbl=['index','middle','ring','little','thumb']
-            x=['previous','current']
+            lbl = ['index','middle','ring','little','thumb']
             
             figure1 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
             
@@ -291,7 +248,7 @@ class Dashboard(tk.Tk):
             line1 = FigureCanvasTkAgg(figure1, main_frame)
             line1.get_tk_widget().place(x=20,y=350)
             for i in range(5):
-                tip[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_tip, marker="o")
+                dip[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_tip, marker="o")
             graph_tip.set_title("DIP")
             
             figure2 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
@@ -311,11 +268,11 @@ class Dashboard(tk.Tk):
             line1 = FigureCanvasTkAgg(figure3, main_frame)
             line1.get_tk_widget().place(x=810,y=350)
             for i in range(5):
-                tip[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_mcp, marker="o")
+                mcp[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_mcp, marker="o")
             graph_mcp.set_title("MCP")
             
             
-            print("End")
+            # print("End")
             
         # main_frame.destroy()
             

@@ -58,16 +58,16 @@ class SignupPage(tk.Tk):
         en_phone= Entry(main_frame, validate="key", validatecommand=(validation_num, '%S'))  
         en_phone.place(x=240, y=180) 
         
-        def selection():
-            print("selected"+str(gen.get()))
+        # def selection():
+        #     print()
         gen = IntVar()  
         # print("init"+str(gen.get()))
         lb5= Label(main_frame, text="Select Gender", width=15, font=("Verdana",12), background="#9EAABF")  
         lb5.place(x=20, y=220)  
         
-        radio_m=Radiobutton(main_frame,text="Male",variable = gen, value=1,command=selection, foreground='#FFFFFF', background="#1c4966", font=("Verdana",12))
+        radio_m=Radiobutton(main_frame,text="Male",variable = gen, value=1, foreground='#FFFFFF', background="#1c4966", font=("Verdana",12))
         radio_m.place(x=240, y=220)
-        radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, command=selection, foreground='#FFFFFF', background="#1c4966", font=("Verdana",12))
+        radio_f=Radiobutton(main_frame,text="Female", variable = gen, value=2, foreground='#FFFFFF', background="#1c4966", font=("Verdana",12))
         radio_f.place(x=320,y=220)
         
         
@@ -132,7 +132,7 @@ class SignupPage(tk.Tk):
                     # credentials.close()
                     
                 query = f"insert into patients(Patient_ID,First_Name,Middle_Name, Last_Name, PPhone, Gender, Age, Occupation) values('{Patient_Id}','{fname}','{mname}','{lname}','{phone}','{pgen}','{age}','{occupation}')"
-                print(query)
+                # print(query)
                 db_conn.mycursor.execute(query)
                 
                 # q1=f"SELECT PId from patients WHERE PPhone='{phone}';"
@@ -165,7 +165,7 @@ class SignupPage(tk.Tk):
                 return False
                 
             except ConnectionError:
-                print("User already exists")
+                # print("User already exists")
                 return False
 
 
