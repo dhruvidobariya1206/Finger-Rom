@@ -2,7 +2,28 @@ import tkinter as tk
 # from tkinter import messagebox
 # from tkinter import ttk
 from tkinter import *
+import left_right as lr
+import mediapipe as mp
+import cv2
+import numpy as np
+import os.path
+import mysql.connector as msc
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import ttk
+from tkinter import *
+from prettytable import PrettyTable
+import subprocess
+from matplotlib.figure import *
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+# from matplotlib import *
+# import os
 
+import db_conn
+import sys
 import db_conn
 import tkinter_demo as tkdemo
 from Signup import *
