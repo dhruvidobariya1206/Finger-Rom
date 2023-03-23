@@ -134,7 +134,7 @@ class SignupPage(tk.Tk):
                 query = f"insert into patients(Patient_ID,First_Name,Middle_Name, Last_Name, PPhone, Gender, Age, Occupation) values('{Patient_Id}','{fname}','{mname}','{lname}','{phone}','{pgen}','{age}','{occupation}')"
                 print(query)
                 db_conn.mycursor.execute(query)
-                db_conn.mydb.commit()
+                # db_conn.mydb.commit()
                 print(query)
                 # q1=f"SELECT PId from patients WHERE PPhone='{phone}';"
                 # db_conn.mycursor.execute(q1)
@@ -168,7 +168,7 @@ class SignupPage(tk.Tk):
             except ConnectionError:
                 # print("User already exists")
                 return False
-
+        db_conn.mydb.commit()
 
 
 # root = SignupPage('tree','9876598630')

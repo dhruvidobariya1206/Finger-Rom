@@ -188,7 +188,7 @@ class History(tk.Tk):
                     value5 = Label(main_frame,text=data[8], width=10)
                     value5.place(x=130+100*cnt, y=350)
                     cnt+=1
-          
+        db_conn.mydb.commit()
 
 # top = History()
 # top.title("History")

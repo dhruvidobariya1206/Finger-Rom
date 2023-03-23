@@ -273,7 +273,7 @@ class Dashboard(tk.Tk):
                 
                 
             # print("End")
-            
+        db_conn.mydb.commit() 
         # main_frame.destroy()
             
             

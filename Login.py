@@ -119,6 +119,8 @@ class LoginPage(tk.Tk):
             except ConnectionError:
                 # print("You need to Register first or amend Line 71 to if True:")
                 return False
+            
+        db_conn.mydb.commit()
 
 
 top = LoginPage()
