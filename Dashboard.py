@@ -233,45 +233,45 @@ class Dashboard(tk.Tk):
                 for data in row3:
                     mcp.append(data)
             
-            dip = pd.DataFrame(dip)
-            pip = pd.DataFrame(pip)
-            mcp = pd.DataFrame(mcp)
-            
-            lbl = ['index','middle','ring','little','thumb']
-            
-            figure1 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
-            
-            graph_tip = figure1.add_subplot(1,1,1)
-            graph_tip.set_ylabel('Angle Measure')
-            graph_tip.set_xlabel('Progress')
-            # graph_tip.set_legend(loc="bottom right")
-            line1 = FigureCanvasTkAgg(figure1, main_frame)
-            line1.get_tk_widget().place(x=20,y=350)
-            for i in range(5):
-                dip[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_tip, marker="o")
-            graph_tip.set_title("DIP")
-            
-            figure2 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
-            graph_pip = figure2.add_subplot(1,1,1)
-            graph_pip.set_ylabel('Angle Measure')
-            graph_pip.set_xlabel('Progress')
-            line1 = FigureCanvasTkAgg(figure2, main_frame)
-            line1.get_tk_widget().place(x=415,y=350)
-            for i in range(5):
-                pip[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_pip, marker="o")
-            graph_pip.set_title("PIP")
-            
-            figure3 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
-            graph_mcp = figure3.add_subplot(1,1,1)
-            graph_mcp.set_ylabel('Angle Measure')
-            graph_mcp.set_xlabel('Progress')
-            line1 = FigureCanvasTkAgg(figure3, main_frame)
-            line1.get_tk_widget().place(x=810,y=350)
-            for i in range(5):
-                mcp[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_mcp, marker="o")
-            graph_mcp.set_title("MCP")
-            
-            
+                dip = pd.DataFrame(dip)
+                pip = pd.DataFrame(pip)
+                mcp = pd.DataFrame(mcp)
+                
+                lbl = ['index','middle','ring','little','thumb']
+                
+                figure1 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
+                
+                graph_tip = figure1.add_subplot(1,1,1)
+                graph_tip.set_ylabel('Angle Measure')
+                graph_tip.set_xlabel('Progress')
+                # graph_tip.set_legend(loc="bottom right")
+                line1 = FigureCanvasTkAgg(figure1, main_frame)
+                line1.get_tk_widget().place(x=20,y=350)
+                for i in range(5):
+                    dip[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_tip, marker="o")
+                graph_tip.set_title("DIP")
+                
+                figure2 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
+                graph_pip = figure2.add_subplot(1,1,1)
+                graph_pip.set_ylabel('Angle Measure')
+                graph_pip.set_xlabel('Progress')
+                line1 = FigureCanvasTkAgg(figure2, main_frame)
+                line1.get_tk_widget().place(x=415,y=350)
+                for i in range(5):
+                    pip[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_pip, marker="o")
+                graph_pip.set_title("PIP")
+                
+                figure3 = plt.Figure(figsize=(3.75, 3.75), dpi=100)
+                graph_mcp = figure3.add_subplot(1,1,1)
+                graph_mcp.set_ylabel('Angle Measure')
+                graph_mcp.set_xlabel('Progress')
+                line1 = FigureCanvasTkAgg(figure3, main_frame)
+                line1.get_tk_widget().place(x=810,y=350)
+                for i in range(5):
+                    mcp[i].plot(kind='line', label=f"{lbl[i]}", legend=True, ax=graph_mcp, marker="o")
+                graph_mcp.set_title("MCP")
+                
+                
             # print("End")
             
         # main_frame.destroy()
