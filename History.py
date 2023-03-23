@@ -36,7 +36,7 @@ class History(tk.Tk):
         db_conn.mycursor.execute(query)
         patient_details = db_conn.mycursor.fetchone()
         
-        lb1= Label(main_frame, text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]}", width=70, height=1, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")  
+        lb1= Label(main_frame, text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]}", width=57, height=1, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")  
         lb1.place(x=0, y=0)
         
         Button(main_frame, text="Left DIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: DIP("left")).place(x=20,y=60)
@@ -47,7 +47,7 @@ class History(tk.Tk):
         Button(main_frame, text="Right MCP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: MCP("right")).place(x=670,y=60)
         
         
-        Button(main_frame, text="Back", width=15, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: back()).place(x=1000,y=60)
+        Button(main_frame, text="Back", width=15, font=("Verdana",14), foreground='#FFFFFF', background="#1c4966", command=lambda: back()).place(x=1025,y=0)
         
         def back():
             History.destroy(self)

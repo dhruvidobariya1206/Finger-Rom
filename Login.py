@@ -36,8 +36,6 @@ class LoginPage(tk.Tk):
 
         tk.Tk.__init__(self, *args, **kwargs)
 
-        # self.user=user
-        # self.phone=phone
 
         # this is the background
         main_frame = tk.Frame(self, bg="#1c4966", height=450, width=300)

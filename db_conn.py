@@ -1,5 +1,5 @@
 import mysql.connector as msc
-
+# import sqlite3
 
 # host = "localhost"              # ip on which the db server is hosted
 # port = "8080"                   # port on which the db is hosted
@@ -8,8 +8,9 @@ import mysql.connector as msc
 # db = "hcd"             # name of the database to access
 
 
-
-mydb = msc.connect(host="sql107.epizy.com", port="3306", user="epiz_33843643", password="Kana120602", database="hcd")        # establishing a connection with the database server
+# mydb = sqlite3.connect("datafile.db")
+# mydb = msc.connect(host="sql107.epizy.com", port="3306", user="epiz_33843643", password="Kana120602", database="hcd")        # establishing a connection with the database server
+mydb = msc.connect(host="localhost", port="3306", user="root", password="", database="hcd")        # establishing a connection with the database server
 mycursor = mydb.cursor(buffered=True)            # accessing the cursor of the database
 
 
