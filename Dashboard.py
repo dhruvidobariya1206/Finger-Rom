@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
-from tkinter import ttk
+# from tkinter import ttk
 from tkinter import *
-from prettytable import PrettyTable
+# from prettytable import PrettyTable
 import subprocess
 from matplotlib.figure import *
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
@@ -108,8 +108,8 @@ class Dashboard(tk.Tk):
             
         
         def list_angles():
-            hand = tk.simpledialog.askstring("Input", "Enter hand:").lower()
-            
+            hand = tk.simpledialog.askstring("Input", "Enter hand:")
+            hand = hand[0].upper() + hand[1:]
             # lb_hand = Label(main_frame, text=hand, width=8, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")
             # lb_hand.place(x=1000,y=100)
             lb1.config(text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]} - {hand} hand")
@@ -139,6 +139,8 @@ class Dashboard(tk.Tk):
             query1 = f"Select * from angle_pip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 1;"
             # print(query1)
             db_conn.mycursor.execute(query1)
+            db_conn.mydb.commit()
+            
             row1 = db_conn.mycursor.fetchone()
             
             # print(cnt1)
@@ -148,12 +150,20 @@ class Dashboard(tk.Tk):
             query2 = f"Select * from angle_tip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 1;"
             # print(query2)
             db_conn.mycursor.execute(query2)
+            db_conn.mydb.commit()
             row2 = db_conn.mycursor.fetchone()
-            
+
             query3 = f"Select * from angle_mcp where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 1;"
-            # print(query3)
+            print(query3)
             db_conn.mycursor.execute(query3)
+            db_conn.mydb.commit()
             row3 = db_conn.mycursor.fetchone()
+
+            
+            print(f'row 1 {row1}  ____')
+            print(f'row 2 {row2}  ____')
+            
+            print(f'row 3 {row3}  ____')
             
             if(len(row1)==0 or len(row2)==0 or len(row3)==0):
                 for ang in range(5):
@@ -197,8 +207,10 @@ class Dashboard(tk.Tk):
                         
         def view_progress():
             # print("View Progress")
-            hand = tk.simpledialog.askstring("Input", "Enter hand:").lower()
+            hand = tk.simpledialog.askstring("Input", "Enter hand:")
+            hand = hand[0].upper() + hand[1:]
             # print(hand)
+            # print(f'hand_ {hand}')
             fig = Figure(figsize = (5,5), dpi = 100)
             lb1.config(text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]} - {hand} hand")
             # plot1 = fig.add_subplot(111)
@@ -206,17 +218,25 @@ class Dashboard(tk.Tk):
             query1 = f"Select ind, mid, ring, little, thumb from angle_pip where P_id='{user_id}' and Hand_Side='{hand}';"
             # print(query1)
             db_conn.mycursor.execute(query1)
+            db_conn.mydb.commit()
             row1 = db_conn.mycursor.fetchall()
             
             query2 = f"Select ind, mid, ring, little, thumb from angle_tip where P_id='{user_id}' and Hand_Side='{hand}';"
             # print(query1)
             db_conn.mycursor.execute(query2)
             row2 = db_conn.mycursor.fetchall()
+            db_conn.mydb.commit()
 
             query3 = f"Select ind, mid, ring, little, thumb from angle_mcp where P_id='{user_id}' and Hand_Side='{hand}';"
             # print(query1)
             db_conn.mycursor.execute(query3)
             row3 = db_conn.mycursor.fetchall()
+            db_conn.mydb.commit()
+            
+            print(f'row 1 {row1}  ____')
+            print(f'row 2 {row2}  ____')
+            
+            print(f'row 3 {row3}  ____')
             
             if(len(row1)==0 or len(row2)==0 or len(row3)==0):
                 tk.messagebox.showinfo("Alert",f"Please record the angles for {hand} hand")

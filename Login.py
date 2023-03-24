@@ -4,11 +4,12 @@ import tkinter as tk
 
 import left_right as lr
 import mediapipe as mp
+# from mediapipe import *
 import cv2
 import numpy as np
 import os.path
 import mysql.connector as msc
-
+from google.protobuf.json_format import MessageToDict
 from prettytable import PrettyTable
 import subprocess
 from matplotlib.figure import *
@@ -89,12 +90,13 @@ class LoginPage(tk.Tk):
 
             validation = validate(Patient_id)
             if validation:
+                
                 LoginPage.destroy(self)
                 Dashboard.Dashboard(Patient_id)
+                top.withdraw()
                 # SignupPage.top.deiconify()
                 # LoginPage.top.deiconify()
                 # LoginPage.destroy(self)
-                top.withdraw()
                 # root.deiconify()          #commented
                 # tkdemo.top.destroy()
                 # top.destroy()

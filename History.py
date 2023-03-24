@@ -39,12 +39,12 @@ class History(tk.Tk):
         lb1= Label(main_frame, text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]}", width=57, height=1, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")  
         lb1.place(x=0, y=0)
         
-        Button(main_frame, text="Left DIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: DIP("left")).place(x=20,y=60)
-        Button(main_frame, text="Left PIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: PIP("left")).place(x=150,y=60)
-        Button(main_frame, text="Left MCP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: MCP("left")).place(x=280,y=60)
-        Button(main_frame, text="Right DIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: DIP("right")).place(x=410,y=60)
-        Button(main_frame, text="Right PIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: PIP("right")).place(x=540,y=60)
-        Button(main_frame, text="Right MCP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: MCP("right")).place(x=670,y=60)
+        Button(main_frame, text="Left DIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: DIP("Left")).place(x=20,y=60)
+        Button(main_frame, text="Left PIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: PIP("Left")).place(x=150,y=60)
+        Button(main_frame, text="Left MCP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: MCP("Left")).place(x=280,y=60)
+        Button(main_frame, text="Right DIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: DIP("Right")).place(x=410,y=60)
+        Button(main_frame, text="Right PIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: PIP("Right")).place(x=540,y=60)
+        Button(main_frame, text="Right MCP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: MCP("Right")).place(x=670,y=60)
         
         
         Button(main_frame, text="Back", width=15, font=("Verdana",14), foreground='#FFFFFF', background="#1c4966", command=lambda: back()).place(x=1025,y=0)
