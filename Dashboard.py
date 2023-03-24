@@ -154,16 +154,10 @@ class Dashboard(tk.Tk):
             row2 = db_conn.mycursor.fetchone()
 
             query3 = f"Select * from angle_mcp where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 1;"
-            print(query3)
+            # print(query3)
             db_conn.mycursor.execute(query3)
             db_conn.mydb.commit()
             row3 = db_conn.mycursor.fetchone()
-
-            
-            print(f'row 1 {row1}  ____')
-            print(f'row 2 {row2}  ____')
-            
-            print(f'row 3 {row3}  ____')
             
             if(len(row1)==0 or len(row2)==0 or len(row3)==0):
                 for ang in range(5):
@@ -233,10 +227,6 @@ class Dashboard(tk.Tk):
             row3 = db_conn.mycursor.fetchall()
             db_conn.mydb.commit()
             
-            print(f'row 1 {row1}  ____')
-            print(f'row 2 {row2}  ____')
-            
-            print(f'row 3 {row3}  ____')
             
             if(len(row1)==0 or len(row2)==0 or len(row3)==0):
                 tk.messagebox.showinfo("Alert",f"Please record the angles for {hand} hand")

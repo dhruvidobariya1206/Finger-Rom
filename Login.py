@@ -105,7 +105,7 @@ class LoginPage(tk.Tk):
                 
                 LoginPage.destroy(self)
                 Dashboard.Dashboard(Patient_id)
-                top.withdraw()
+                # top.withdraw()
                 # SignupPage.top.deiconify()
                 # LoginPage.top.deiconify()
                 # LoginPage.destroy(self)
@@ -141,4 +141,6 @@ top = LoginPage()
 top.title("Login Page")
 top.mainloop()
 
-top.destroy()
+if top.winfo_exists():
+    top.destroy()
+# top.destroy()
