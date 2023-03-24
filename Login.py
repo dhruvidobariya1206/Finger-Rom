@@ -53,21 +53,33 @@ class LoginPage(tk.Tk):
             return char.isdigit()
         validation = main_frame.register(only_numbers)
 
+        db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'C%'")
+        rowC = db_conn.mycursor.fetchone()
+        db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'J%'")
+        rowJ = db_conn.mycursor.fetchone()
+        
+        if(rowC==None):
+            rowC=['C0']
+        elif(rowJ==None):
+            rowJ=['J0']
+        last = Label(main_frame, text=f"Last Count : {rowC[0]}\n\t    {rowJ[0]}", width=15, font=("Verdana",10), background="#9EAABF")
+        last.place(x=5,y=5)
+
         lb0 = Label(main_frame, text="Patient Category", width=20,
                     font=("Verdana", 12), background="#9EAABF")
-        lb0.place(x=20, y=60)
+        lb0.place(x=20, y=90)
         options = ['C', 'J']
         clicked = StringVar()
         clicked.set(options[0])
         drop = OptionMenu(main_frame, clicked, *options)
-        drop.place(x=240, y=60)
+        drop.place(x=240, y=90)
 
         lb1 = Label(main_frame, text="Patient Id", width=20,
                     font=("Verdana", 12), background="#9EAABF")
-        lb1.place(x=20, y=100)
+        lb1.place(x=20, y=130)
         en1 = Entry(main_frame, width=15, validate="key",
                     validatecommand=(validation, '%S'))
-        en1.place(x=240, y=100)
+        en1.place(x=240, y=130)
 
         # , validate="key", validatecommand=(validation, '%S')
         # lb3= Label(main_frame, text="Enter Password", width=20, font=("Verdana",12))
