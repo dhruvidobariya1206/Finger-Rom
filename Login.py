@@ -81,11 +81,6 @@ class LoginPage(tk.Tk):
                     validatecommand=(validation, '%S'))
         en1.place(x=240, y=130)
 
-        # , validate="key", validatecommand=(validation, '%S')
-        # lb3= Label(main_frame, text="Enter Password", width=20, font=("Verdana",12))
-        # lb3.place(x=20, y=140)
-        # en3= Entry(main_frame, show="*")
-        # en3.place(x=240, y=140)
 
         Button(main_frame, text="Login", width=15, command=lambda: getlogin(
         ), background="#9EAABF").place(x=150, y=200)
@@ -102,7 +97,10 @@ class LoginPage(tk.Tk):
 
             validation = validate(Patient_id)
             if validation:
-                
+                # try:
+                #     LoginPage.destroy(self)
+                # except tk.TclError:
+                #     pass
                 LoginPage.destroy(self)
                 Dashboard.Dashboard(Patient_id)
                 # top.withdraw()
@@ -140,7 +138,24 @@ class LoginPage(tk.Tk):
 top = LoginPage()
 top.title("Login Page")
 top.mainloop()
-
-if top.winfo_exists():
+try:
     top.destroy()
+except tk.TclError:
+    # top.destroy()
+    pass
+
+# top.protocol("WM_DELETE_WINDOW",  on_close)
+
+
+
+# def on_closing():
+#     try:
+#         top.protocol("WM_DELETE_WINDOW", top.destroy)
+#     except tk.TclError:
+#         pass
+#     top.quit()
+    
+# top.protocol("WM_DELETE_WINDOW", on_closing)
+# if top.winfo_exists():
+#     top.destroy()
 # top.destroy()

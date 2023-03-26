@@ -1,6 +1,6 @@
-print("in hcd")
-print()
-print()
+# print("in hcd")
+# print()
+# print()
 import left_right as lr
 import mediapipe as mp
 import cv2
@@ -20,7 +20,7 @@ mp_hands = mp.solutions.hands
 
 
 user = sys.argv[1]
-print(user)
+# print(user)
 
 
 # from matplotlib import pyplot as plt
@@ -169,7 +169,7 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
             # print()
             # print()
             # print()
-            print(hand)
+            # print(hand)
             # print(f'which hand {which_hand}')
             # print()
             # print()
@@ -182,7 +182,7 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
             pinky_angles["PINKY_PIP"]=round(pinky_angles["PINKY_PIP"],1)
             thumb_angles["THUMB_IP"]=round(thumb_angles["THUMB_IP"],1)
             query_pip = f"insert into angle_pip(P_id,Hand_Side,ind,mid,ring,little,thumb) values('{user}','{hand}','{index_angles['INDEX_FINGER_PIP']}','{middle_angles['MIDDLE_FINGER_PIP']}','{ring_angles['RING_FINGER_PIP']}','{pinky_angles['PINKY_PIP']}','{thumb_angles['THUMB_IP']}')"
-            print(query_pip)
+            # print(query_pip)
             db_conn.mycursor.execute(query_pip) 
 
             index_angles["INDEX_FINGER_TIP"]=round(index_angles["INDEX_FINGER_TIP"],1)
@@ -191,7 +191,7 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
             pinky_angles["PINKY_TIP"]=round(pinky_angles["PINKY_TIP"],1)
             thumb_angles["THUMB_IP"]=round(thumb_angles["THUMB_IP"],1)
             query_tip = f"insert into angle_tip(P_id,Hand_Side,ind,mid,ring,little,thumb) values('{user}','{hand}','{index_angles['INDEX_FINGER_TIP']}','{middle_angles['MIDDLE_FINGER_TIP']}','{ring_angles['RING_FINGER_TIP']}','{pinky_angles['PINKY_TIP']}','{thumb_angles['THUMB_IP']}')"
-            print(query_tip)
+            # print(query_tip)
             db_conn.mycursor.execute(query_tip)
             
             index_angles["INDEX_FINGER_MCP"]=round(index_angles["INDEX_FINGER_MCP"],1)
@@ -200,15 +200,10 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
             pinky_angles["PINKY_MCP"]=round(pinky_angles["PINKY_MCP"],1)
             thumb_angles["THUMB_TIP"]=round(thumb_angles["THUMB_TIP"],1)
             query_mcp = f"insert into angle_mcp(P_id,Hand_Side,ind,mid,ring,little,thumb) values('{user}','{hand}','{index_angles['INDEX_FINGER_MCP']}','{middle_angles['MIDDLE_FINGER_MCP']}','{ring_angles['RING_FINGER_MCP']}','{pinky_angles['PINKY_MCP']}','{thumb_angles['THUMB_TIP']}')"
-            print(query_mcp)
+            # print(query_mcp)
             db_conn.mycursor.execute(query_mcp)
             
-            row = db_conn.mycursor.execute("select * from angle_mcp limit 1;")
-            print()
-            print()
-            print(row)
-            print()
-            print()
+            
             break
         
     db_conn.mydb.commit()

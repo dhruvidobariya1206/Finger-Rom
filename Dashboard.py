@@ -11,10 +11,11 @@ import numpy as np
 import pandas as pd
 # from matplotlib import *
 # import os
+from tkinter import Tk, StringVar, ttk
 
 import db_conn
 import tkinter_demo as tkdemo
-# import Signup
+from msgBox import msgBox
 import Login
 import History
 # from Login import *
@@ -23,6 +24,14 @@ import History
 # from hcd import *
 # user = Login.getlogin.username
 # print(user)
+
+selected_hand = ''
+
+# ########################################################################################################
+
+# ########################################################################################################
+
+
 
 class Dashboard(tk.Tk):
     def __init__(self, Patient_Id, *args, **kwargs):
@@ -43,7 +52,7 @@ class Dashboard(tk.Tk):
         main_frame.pack(fill="both", expand="true")
         
         self.geometry("1200x750")  # Sets window size to 626w x 431h pixels
-        self.resizable(0, 0)  # This prevents any resizing of the screen
+          # This prevents any resizing of the screen
         title_styles = {"font": ("Trebuchet MS Bold", 16), "background": "dark blue"}
 
         text_styles = {"font": ("Verdana", 14),
@@ -107,12 +116,27 @@ class Dashboard(tk.Tk):
             # Dashboard.destroy(self)
             
         
+
+    # Get the selected option
+            # return hand.get()
+        
+        
         def list_angles():
-            hand = tk.simpledialog.askstring("Input", "Enter hand:")
-            hand = hand[0].upper() + hand[1:]
+            # hand = tk.simpledialog.askstring("Input", "Enter hand:")
+            # hand = hand[0].upper() + hand[1:]
+            
+            dialog_window = tk.Toplevel(self)
+            dialog = msgBox(dialog_window)
+            hand = dialog.show()
+            # print(f"hand={hand}")
+            # Update the main window with the selected hand value
             # lb_hand = Label(main_frame, text=hand, width=8, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")
             # lb_hand.place(x=1000,y=100)
-            lb1.config(text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]} - {hand} hand")
+
+            
+                
+            
+            lb1.config(text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]} - {hand.lower()} hand")
             
             # ang_label1 = Label(main_frame,text='Sr No.', width=10)
             # ang_label1.place(x=20, y=100)
@@ -143,10 +167,7 @@ class Dashboard(tk.Tk):
             
             row1 = db_conn.mycursor.fetchone()
             
-            # print(cnt1)
-            # print()
-            # print()
-            # print()
+            
             query2 = f"Select * from angle_tip where P_id='{user_id}' and Hand_Side='{hand}' ORDER BY SrNo DESC LIMIT 1;"
             # print(query2)
             db_conn.mycursor.execute(query2)
@@ -201,8 +222,12 @@ class Dashboard(tk.Tk):
                         
         def view_progress():
             # print("View Progress")
-            hand = tk.simpledialog.askstring("Input", "Enter hand:")
-            hand = hand[0].upper() + hand[1:]
+            # hand = tk.simpledialog.askstring("Input", "Enter hand:")
+            # hand = hand[0].upper() + hand[1:]
+            
+            dialog_window = tk.Toplevel(self)
+            dialog = msgBox(dialog_window)
+            hand = dialog.show()
             # print(hand)
             # print(f'hand_ {hand}')
             fig = Figure(figsize = (5,5), dpi = 100)

@@ -1,26 +1,43 @@
-# import sqlite3
+# # import tkinter as tk
+# # import tkinter.simpledialog as sd
 
-# # create connection to database 'demo'
-# conn = sqlite3.connect('demo.db')
+# # class CustomDialog(sd.Dialog):
+# #     def __init__(self, master, options):
+# #         self.options = options
+# #         self.result = None
+# #         sd.Dialog.__init__(self, master, "Select an option")
+        
+# #     def body(self, master):
+# #         self.var = tk.StringVar()
+# #         for option in self.options:
+# #             b = tk.Radiobutton(master, text=option, variable=self.var, value=option)
+# #             b.pack(anchor='w')
+# #         return b
 
-# # create table 'table1'
-# conn.execute('''CREATE TABLE table1
-#                 (name TEXT,
-#                  id INT)''')
+# #     def apply(self):
+# #         self.result = self.var.get()
+        
 
-# # insert data into table
-# conn.execute("INSERT INTO table1 (name, id) VALUES ('John', 1)")
-# conn.execute("INSERT INTO table1 (name, id) VALUES ('Jane', 2)")
+# import tkinter as tk
+import tkinter.simpledialog as sd
 
-# # commit changes
-# conn.commit()
+class CustomDialog(sd.Dialog):
+    def __init__(self, master, options):
+        self.options = options
+        self.result = None
+        sd.Dialog.__init__(self, master, "Select an option")
 
-# # select and display data from table
-# cursor = conn.execute("SELECT name, id FROM table1")
-# print(type(cursor))
-# for row in cursor:
-#     print("Name = ", row[0])
-#     print("ID = ", row[1])
+    def body(self, master):
+        self.var = tk.StringVar()
+        self.var.set(self.options[0])
+        option_menu = tk.OptionMenu(master, self.var, *self.options)
+        option_menu.pack(anchor='w')
+        return option_menu
 
-# # close connection
-# conn.close()
+    def apply(self):
+        self.result = self.var.get()
+        print(self.result + " selected")
+
+
+
+
