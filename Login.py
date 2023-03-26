@@ -138,11 +138,12 @@ class LoginPage(tk.Tk):
 top = LoginPage()
 top.title("Login Page")
 top.mainloop()
-try:
-    top.destroy()
-except tk.TclError:
-    # top.destroy()
-    pass
+top.destroy()
+# try:
+#     top.destroy()
+# except tk.TclError:
+#     # top.destroy()
+#     pass
 
 # top.protocol("WM_DELETE_WINDOW",  on_close)
 
