@@ -132,10 +132,10 @@ class SignupPage(tk.Tk):
                     # credentials.close()
                     
                 query = f"insert into patients(Patient_ID,First_Name,Middle_Name, Last_Name, PPhone, Gender, Age, Occupation) values('{Patient_Id}','{fname}','{mname}','{lname}','{phone}','{pgen}','{age}','{occupation}')"
-                print(query)
+                # print(query)
                 db_conn.mycursor.execute(query)
                 # db_conn.mydb.commit()
-                print(query)
+                # print(query)
                 # q1=f"SELECT PId from patients WHERE PPhone='{phone}';"
                 # db_conn.mycursor.execute(q1)
                 # row1 = db_conn.mycursor.fetchone()

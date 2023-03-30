@@ -53,9 +53,9 @@ class LoginPage(tk.Tk):
             return char.isdigit()
         validation = main_frame.register(only_numbers)
 
-        db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'C%'")
+        db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'C%' ORDER BY Patient_ID DESC LIMIT 1;")
         rowC = db_conn.mycursor.fetchone()
-        db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'J%'")
+        db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'J%' ORDER BY Patient_ID DESC LIMIT 1;")
         rowJ = db_conn.mycursor.fetchone()
         
         if(rowC==None):
