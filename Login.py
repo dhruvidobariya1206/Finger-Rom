@@ -25,6 +25,7 @@ import sys
 import tkinter_demo as tkdemo
 from Signup import *
 import Dashboard
+import RecordList
 
 
 class LoginPage(tk.Tk):
@@ -83,9 +84,17 @@ class LoginPage(tk.Tk):
 
 
         Button(main_frame, text="Login", width=15, command=lambda: getlogin(
-        ), background="#9EAABF").place(x=150, y=200)
+        ), background="#9EAABF").place(x=250, y=200)
         # Button(main_frame, text="Register", width=15, command=lambda: get_signup()).place(x=300,y=200)
+        
+        Button(main_frame, text="View Records", width=15, command=lambda: ListRecords(
+        ), background="#9EAABF").place(x=100, y=200)
 
+
+        def ListRecords():
+            LoginPage.destroy(self)
+            RecordList.RecordList()
+        
         def get_signup(Patient_Id):
             SignupPage(Patient_Id)
             # SignupPage()

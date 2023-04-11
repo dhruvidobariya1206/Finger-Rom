@@ -21,6 +21,7 @@ class History(tk.Tk):
         # this is the background
         main_frame = tk.Frame(self, bg="#9EAABF", height=450, width=300)
         main_frame.pack(fill="both", expand="true")
+        main_frame.propagate(0)
 
         self.geometry("1200x750")  # Sets window size to 626w x 431h pixels
         # self.resizable(0, 0)  # This prevents any resizing of the screen
@@ -36,7 +37,7 @@ class History(tk.Tk):
         db_conn.mycursor.execute(query)
         patient_details = db_conn.mycursor.fetchone()
         
-        lb1= Label(main_frame, text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]}", width=57, height=1, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")  
+        lb1= Label(main_frame, text=f"{patient_details[1]} {patient_details[2]} {patient_details[3]}", width=1200, height=1, font=("Verdana",22), foreground='#FFFFFF', background="#1c4966")  
         lb1.place(x=0, y=0)
         
         Button(main_frame, text="Left DIP", width=10, font=("Verdana",12), foreground='#FFFFFF', background="#1c4966", command=lambda: DIP("Left")).place(x=20,y=60)
@@ -48,6 +49,7 @@ class History(tk.Tk):
         
         
         Button(main_frame, text="Back", width=15, font=("Verdana",14), foreground='#FFFFFF', background="#1c4966", command=lambda: back()).place(x=1025,y=0)
+        # Button(main_frame, text="Back", width=15, font=("Verdana",14), foreground='#FFFFFF', background="#1c4966", command=lambda: back()).pack(side=)
         
         def back():
             History.destroy(self)
@@ -55,7 +57,7 @@ class History(tk.Tk):
             
         def DIP(hand):
             # print("DIP"+hand)
-            query1 = f"Select * from angle_tip where P_id = '{user_id}' and Hand_Side = '{hand}'"
+            query1 = f"Select DATE(Time), ind, mid, ring, little, thumb from angle_tip where P_id = '{user_id}' and Hand_Side = '{hand}'"
             # print(query1)
             db_conn.mycursor.execute(query1)
             row1 = db_conn.mycursor.fetchall()
@@ -79,28 +81,28 @@ class History(tk.Tk):
                 cnt=0
                 for data in row1:
                     # print(data)
-                    ang_label2 = Label(main_frame,text=data[3], width=10, foreground='#FFFFFF', background="#1c4966")
+                    ang_label2 = Label(main_frame,text=data[0], width=10, foreground='#FFFFFF', background="#1c4966")
                     ang_label2.place(x=130+100*cnt, y=150)
                     
-                    value1 = Label(main_frame,text=data[4], width=10)
+                    value1 = Label(main_frame,text=data[1], width=10)
                     value1.place(x=130+100*cnt, y=190)
                 
-                    value2 = Label(main_frame,text=data[5], width=10)
+                    value2 = Label(main_frame,text=data[2], width=10)
                     value2.place(x=130+100*cnt, y=230)
                 
-                    value3 = Label(main_frame,text=data[6], width=10)
+                    value3 = Label(main_frame,text=data[3], width=10)
                     value3.place(x=130+100*cnt, y=270)
                     
-                    value4 = Label(main_frame,text=data[7], width=10)
+                    value4 = Label(main_frame,text=data[4], width=10)
                     value4.place(x=130+100*cnt, y=310)
                     
-                    value5 = Label(main_frame,text=data[8], width=10)
+                    value5 = Label(main_frame,text=data[5], width=10)
                     value5.place(x=130+100*cnt, y=350)
                     cnt+=1
         
         def PIP(hand):
             # print("PIP"+hand)
-            query1 = f"Select * from angle_pip where P_id = '{user_id}' and Hand_Side = '{hand}'"
+            query1 = f"Select DATE(Time), ind, mid, ring, little, thumb from angle_pip where P_id = '{user_id}' and Hand_Side = '{hand}'"
             # print(query1)
             db_conn.mycursor.execute(query1)
             row1 = db_conn.mycursor.fetchall()
@@ -124,29 +126,29 @@ class History(tk.Tk):
                 cnt=0
                 for data in row1:
                     # print(data)
-                    ang_label2 = Label(main_frame,text=data[3], width=10, foreground='#FFFFFF', background="#1c4966")
+                    ang_label2 = Label(main_frame,text=data[0], width=10, foreground='#FFFFFF', background="#1c4966")
                     ang_label2.place(x=130+100*cnt, y=150)
                     
-                    value1 = Label(main_frame,text=data[4], width=10)
+                    value1 = Label(main_frame,text=data[1], width=10)
                     value1.place(x=130+100*cnt, y=190)
                 
-                    value2 = Label(main_frame,text=data[5], width=10)
+                    value2 = Label(main_frame,text=data[2], width=10)
                     value2.place(x=130+100*cnt, y=230)
                 
-                    value3 = Label(main_frame,text=data[6], width=10)
+                    value3 = Label(main_frame,text=data[3], width=10)
                     value3.place(x=130+100*cnt, y=270)
                     
-                    value4 = Label(main_frame,text=data[7], width=10)
+                    value4 = Label(main_frame,text=data[4], width=10)
                     value4.place(x=130+100*cnt, y=310)
                     
-                    value5 = Label(main_frame,text=data[8], width=10)
+                    value5 = Label(main_frame,text=data[5], width=10)
                     value5.place(x=130+100*cnt, y=350)
                     cnt+=1
         
         
         def MCP(hand): 
             # print("MCP"+hand) 
-            query1 = f"Select * from angle_mcp where P_id = '{user_id}' and Hand_Side = '{hand}'"
+            query1 = f"Select DATE(Time), ind, mid, ring, little, thumb from angle_mcp where P_id = '{user_id}' and Hand_Side = '{hand}'"
             # print(query1)
             db_conn.mycursor.execute(query1)
             row1 = db_conn.mycursor.fetchall()
@@ -170,22 +172,22 @@ class History(tk.Tk):
                 cnt=0
                 for data in row1:
                     # print(data)
-                    ang_label2 = Label(main_frame,text=data[3], width=10, foreground='#FFFFFF', background="#1c4966")
+                    ang_label2 = Label(main_frame,text=data[0], width=10, foreground='#FFFFFF', background="#1c4966")
                     ang_label2.place(x=130+100*cnt, y=150)
                     
-                    value1 = Label(main_frame,text=data[4], width=10)
+                    value1 = Label(main_frame,text=data[1], width=10)
                     value1.place(x=130+100*cnt, y=190)
                 
-                    value2 = Label(main_frame,text=data[5], width=10)
+                    value2 = Label(main_frame,text=data[2], width=10)
                     value2.place(x=130+100*cnt, y=230)
                 
-                    value3 = Label(main_frame,text=data[6], width=10)
+                    value3 = Label(main_frame,text=data[3], width=10)
                     value3.place(x=130+100*cnt, y=270)
                     
-                    value4 = Label(main_frame,text=data[7], width=10)
+                    value4 = Label(main_frame,text=data[4], width=10)
                     value4.place(x=130+100*cnt, y=310)
                     
-                    value5 = Label(main_frame,text=data[8], width=10)
+                    value5 = Label(main_frame,text=data[5], width=10)
                     value5.place(x=130+100*cnt, y=350)
                     cnt+=1
         db_conn.mydb.commit()
