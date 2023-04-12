@@ -54,17 +54,17 @@ class LoginPage(tk.Tk):
             return char.isdigit()
         validation = main_frame.register(only_numbers)
 
-        db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'C%' ORDER BY Patient_ID DESC LIMIT 1;")
-        rowC = db_conn.mycursor.fetchone()
-        db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'J%' ORDER BY Patient_ID DESC LIMIT 1;")
-        rowJ = db_conn.mycursor.fetchone()
+        # db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'C%' ORDER BY Patient_ID DESC LIMIT 1;")
+        # rowC = db_conn.mycursor.fetchone()
+        # db_conn.mycursor.execute("SELECT Patient_ID FROM patients WHERE Patient_ID LIKE 'J%' ORDER BY Patient_ID DESC LIMIT 1;")
+        # rowJ = db_conn.mycursor.fetchone()
         
-        if(rowC==None):
-            rowC=['C0']
-        elif(rowJ==None):
-            rowJ=['J0']
-        last = Label(main_frame, text=f"Last Count : {rowC[0]}\n\t    {rowJ[0]}", width=15, font=("Verdana",10), background="#9EAABF")
-        last.place(x=5,y=5)
+        # if(rowC==None):
+        #     rowC=['C0']
+        # elif(rowJ==None):
+        #     rowJ=['J0']
+        # last = Label(main_frame, text=f"Last Count : {rowC[0]}\n\t    {rowJ[0]}", width=15, font=("Verdana",10), background="#9EAABF")
+        # last.place(x=5,y=5)
 
         lb0 = Label(main_frame, text="Patient Category", width=20,
                     font=("Verdana", 12), background="#9EAABF")
@@ -93,7 +93,7 @@ class LoginPage(tk.Tk):
 
         def ListRecords():
             LoginPage.destroy(self)
-            RecordList.RecordList()
+            RecordList.RecordList('J1','Left')
         
         def get_signup(Patient_Id):
             SignupPage(Patient_Id)
